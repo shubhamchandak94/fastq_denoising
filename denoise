@@ -7,10 +7,10 @@ set -e
 # PARAMETERS
 #################
 num_thr=8
-param1="default"
+mode="default"
+param1=8.0
 param2=0.0
 param3=0.0
-
 
 usage()
 {
@@ -55,8 +55,6 @@ denoise()
 	echo "#define maxshift $((readlen/2))" > src/config.h
 
 	echo "#define thresh $reorder_thresh" >> src/config.h
-
-	echo "#define thresh_s $realign_thresh" >> src/config.h
 	echo "#define numdict 2" >> src/config.h
 	echo "#define maxsearch 1000" >> src/config.h
 	echo "#define dict1_start $(( readlen > 100 ? readlen/2-20 : readlen/2-readlen*20/100 ))" >> src/config.h
@@ -68,7 +66,7 @@ denoise()
 	echo "#define num_thr $num_thr" >> src/config.h
 
 	g++ src/denoise.cpp -march=native -O3 -fopenmp -lpthread -std=c++11 -o src/denoise.out
-	./src/denoise.out $pathname $param1 $param2 $param3
+	./src/denoise.out $pathname $mode $param1 $param2 $param3
 
 	mv $pathname/output/output.id $pathname/$(basename "$filename" .fastq).id
 	mv $pathname/output/output.dna $pathname/$(basename "$filename" .fastq).dna.d
@@ -88,9 +86,10 @@ while getopts ':d:t:1:2:3:h' opt; do
   case "$opt" in
     d) mode='d' && filename=$OPTARG;;
     t) num_thr=$OPTARG;;
+    m) mode=$OPTARG;;
     1) param1=$OPTARG;;
     2) param2=$OPTARG;;
-    3) param3=$OPTARG;;
+	3) param3=$OPTARG;;
     h) usage ;;
     \?) usage ;;
     *) usage ;;
