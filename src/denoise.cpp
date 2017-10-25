@@ -44,6 +44,8 @@ class bbhashdict
 };
 
 uint32_t numreads = 0;
+std::string param1;
+double param2,param3;
 
 std::string infilenumreads;
 
@@ -52,6 +54,7 @@ std::string infile_quality;
 std::string outfile;
 std::string outfile_quality;
 std::string outdir;
+
 
 //Some global arrays (some initialized in setglobalarrays())
 char revinttochar[8] = {'A','N','G','#','C','#','T','#'};//used in bitsettostring
@@ -65,65 +68,46 @@ bitset mask63;//bitset with 63 bits set to 1 (used in bitsettostring for convers
 char longtochar[] = {'A','C','G','T','N'};
 long chartolong[128];
 
+
 int *dict_start;
 int *dict_end; 
+bitset mask[maxshift];
+bitset revmask[maxshift];
+bitset indexmask[numdict];
+
 
 double quality_to_p_pbar[42];
 double log_1_p[42];
 double log_p_3[42];
 
-bitset stringtobitset(std::string s);
 
-void bitsettostring(bitset b,char *s);
+void denoise(bitset *read, char(*quality)[readlen+1], bbhashdict *dict);
+
+void find_overlapping_reads(bitset &current_bitset, std::string &current_quality, std::vector<std::string> &overlap_reads, std::vector<int> &overlap_shift, 
+							std::vector<std::string> &overlap_quality, bitset *read, bbhashdict *dict);
+
+
+void denoise_read(std::string &current_read, std::string &current_quality, std::string &denoised_read, std::string &denoised_quality ,std::vector<std::string> &overlap_reads, 
+		std::vector<int> &overlap_shift, std::vector<std::string> &overlap_quality);
 
 void readDnaFile(bitset *read);
 
-int getDataParams();
+void readQualityFile(char(*quality)[readlen+1]);
 
 void constructdictionary(bitset *read, bbhashdict *dict);
-
-//void constructdictionary(bitset *read, spp::sparse_hash_map<uint64_t,uint32_t*> *dict);
-
-void generatemasks(bitset *mask,bitset *revmask);
-//mask for zeroing the end bits (needed while reordering to compute Hamming distance between shifted reads)
-
-void reorder(bitset *read, bbhashdict *dict);
-
-void writetofile(bitset *read);
-
-void updaterefcount(bitset cur, bitset &ref, bitset &revref, int count[][readlen], bool resetcount, bool rev, int shift);
-//update the clean reference and count matrix
-
-void reverse_complement(char *s, char *s1);
-
-bitset chartobitset(char &s);
-
-void setglobalarrays();
-//setting arrays like chartoint etc.
-
-
-float alternate_thresh = 0.0;
-
-
-
 
 bitset stringtobitset(std::string s);
 
+void generateindexmasks(bitset *indexmask);
+
+void generatemasks(bitset *mask,bitset *revmask);
+
 std::string bitsettostring(bitset b);
-
-void readsingletons(bitset *read, uint32_t *order_s, std::string *quality_sN);
-
-void constructdictionary(bitset *read, bbhashdict *dict);
-
 
 std::string reverse_complement(std::string s);
 
-void generateindexmasks(bitset *mask1);
+void setglobalarrays();
 
-std::string generateRef(std::vector<std::array<long,5>> count);
-
-std::vector<std::array<long,5>> buildcontig(std::list<std::string> reads, std::list<long> pos, uint32_t list_size);//using lists to enable faster insertion of singletons
-void writecontig(std::vector<std::array<long,5>> count, std::list<long> &pos, std::list<std::string> &reads, std::list<uint32_t> &order, std::list<char> &RC, std::list<std::string> &quality, std::ofstream& f_seq, std::ofstream& f_pos, std::ofstream& f_noise, std::ofstream& f_noisepos, std::ofstream& f_order, std::ofstream &f_RC, std::ofstream &f_order_N_pe, std::ofstream &f_flag_N, std::ofstream &f_quality, std::ofstream &f_quality_N, uint32_t list_size);
 
 int main(int argc, char** argv)
 {
@@ -135,6 +119,10 @@ int main(int argc, char** argv)
 	outfile_quality = basedir + "/output/output.quality";
 	infilenumreads = basedir + "/output/numreads.bin";
 	
+	param1 = std::string(argv[2]);
+	param2 = atof(argv[3]);
+	param3 = atof(argv[4]);
+
 	std::ifstream f_numreads(infilenumreads, std::ios::binary);
 	f_numreads.read((char*)&numreads,sizeof(uint32_t));	
 	omp_set_num_threads(num_thr);	
@@ -162,22 +150,9 @@ int main(int argc, char** argv)
 }
 
 
-bitset stringtobitset(std::string s)
-{
-	bitset b;
-	for(int i = 0; i < readlen; i++)
-		b |= basemask[i][s[i]];
-	return b;
-}
 
 void denoise(bitset *read, char(*quality)[readlen+1], bbhashdict *dict)
 {
-	bitset mask[maxshift];
-	bitset revmask[maxshift];
-	generatemasks(mask,revmask);
-	bitset indexmask[numdict];
-	generateindexmasks(indexmask);
-
 	#pragma omp parallel
 	{
 	int tid = omp_get_thread_num();
@@ -191,29 +166,22 @@ void denoise(bitset *read, char(*quality)[readlen+1], bbhashdict *dict)
 	std::ofstream fout_quality(outfile_quality+'.'+std::to_string(tid));
 	while(i < stop)
 	{
+		bitset current_bitset = read[i];
+		std::string current_quality = quality[i];
 		std::vector<std::string> overlap_reads;//reads overlapping with current read
 		std::vector<int> overlap_shift;//shift of overlapping reads wrt current read - 0 for current read, -ve for reads on left
 		std::vector<std::string> overlap_quality;//qualities of overlapping reads (reversed if read was reversed)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+		find_overlapping_reads(current_bitset,current_quality,overlap_reads,overlap_shift,overlap_quality,read,dict);
+		std::string current_read = bitsettostring(current_bitset);
+		std::string denoised_read = current_read, denoised_quality = current_quality;
+		denoise_read(current_read, current_quality,denoised_read,denoised_quality,overlap_reads,overlap_shift,overlap_quality);
+		fout << denoised_read << "\n";
+		fout_quality << denoised_quality << "\n";
 		i++;	
 	}
 	fout.close();
 	fout_quality.close();
-	}
+	}//parallel end
 
 	//combine files produced by the threads
 	std::ofstream fout(outfile);
@@ -221,8 +189,8 @@ void denoise(bitset *read, char(*quality)[readlen+1], bbhashdict *dict)
 
 	for(int tid = 0; tid < num_thr; tid++)
 	{
-		std::ifstream fin(infile+'.'+std::to_string(tid));
-		std::ifstream fin_quality(infile_quality+'.'+std::to_string(tid));
+		std::ifstream fin(outfile+'.'+std::to_string(tid));
+		std::ifstream fin_quality(outfile_quality+'.'+std::to_string(tid));
 
 		fout << fin.rdbuf();
 		fout_quality << fin_quality.rdbuf();
@@ -236,7 +204,17 @@ void denoise(bitset *read, char(*quality)[readlen+1], bbhashdict *dict)
 	return;
 }
 
-void find_overlapping_reads(std::vector<std::string> &overlap_reads, std::vector<int> &overlap_shift, std::vector<std::string> &overlap_quality, bitset *read, bbhashdict *dict)
+void find_overlapping_reads(bitset &current_bitset, std::string &current_quality, std::vector<std::string> &overlap_reads, std::vector<int> &overlap_shift, 
+							std::vector<std::string> &overlap_quality, bitset *read, bbhashdict *dict)
+{
+	return;
+}
+
+void denoise_read(std::string &current_read, std::string &current_quality, std::string &denoised_read, std::string &denoised_quality ,std::vector<std::string> &overlap_reads, 
+		std::vector<int> &overlap_shift, std::vector<std::string> &overlap_quality)
+{
+	return;
+}
 
 
 void readDnaFile(bitset *read)
@@ -291,8 +269,6 @@ void readQualityFile(char(*quality)[readlen+1])
 
 void constructdictionary(bitset *read, bbhashdict *dict)
 {
-	bitset mask[numdict];
-	generateindexmasks(mask);
 	for(int j = 0; j < numdict; j++)
 	{
 		uint64_t *ull = new uint64_t[numreads];
@@ -309,7 +285,7 @@ void constructdictionary(bitset *read, bbhashdict *dict)
 		//compute keys and write to file and store in ull
 		for(; i < stop; i++)
 		{
-			b = read[i]&mask[j];
+			b = read[i]&indexmask[j];
 			ull[i] = (b>>3*dict_start[j]).to_ullong();
 			foutkey.write((char*)&ull[i], sizeof(uint64_t));
 		}
@@ -408,6 +384,14 @@ void constructdictionary(bitset *read, bbhashdict *dict)
 	return;
 }
 
+bitset stringtobitset(std::string s)
+{
+	bitset b;
+	for(int i = 0; i < readlen; i++)
+		b |= basemask[i][s[i]];
+	return b;
+}
+
 void generateindexmasks(bitset *indexmask)
 //masks for dictionary positions
 {
@@ -416,6 +400,20 @@ void generateindexmasks(bitset *indexmask)
 	for(int j = 0; j < numdict; j++)
 		for(int i = 3*dict_start[j]; i < 3*(dict_end[j]+1); i++)
 			indexmask[j][i] = 1;
+	return;
+}
+
+void generatemasks(bitset *mask,bitset *revmask)
+{
+	for(int i = 0; i < maxshift; i++)
+	{	
+		mask[i].reset();
+		revmask[i].reset();
+		for(int j = 0; j < 3*readlen - 3*i; j++)
+			mask[i][j] = 1;
+		for(int j = 3*i; j < 3*readlen; j++)
+			revmask[i][j] = 1; 	
+	}
 	return;
 }
 
@@ -457,6 +455,35 @@ void bbhashdict::remove(int64_t *dictidx, uint32_t &startposidx, uint32_t curren
 	return;	
 }
 
+
+
+std::string bitsettostring(bitset b)
+{
+	char s[readlen+1];
+	s[readlen] = '\0';
+	unsigned long long ull,rem;
+	for(int i = 0; i < 3*readlen/63+1; i++)
+	{	
+		ull = (b&mask63).to_ullong();
+		b>>=63;
+		for(int j = 21*i  ; j < 21*i+21 && j < readlen ; j++)
+		{
+			s[j] = revinttochar[ull%8];	
+			ull/=8;
+		}
+	}
+	std::string s1 = s;
+	return s1;
+}
+
+
+std::string reverse_complement(std::string s)
+{
+	std::string s1(s);
+	for(int j = 0; j < readlen; j++)
+		s1[j] = chartorevchar[s[readlen-j-1]];
+	return s1;
+}
 
 void setglobalarrays()
 {
@@ -535,6 +562,9 @@ void setglobalarrays()
 		positionmask[i][3*i+1] = 1;
 		positionmask[i][3*i+2] = 1;
 	}		
+	generatemasks(mask,revmask);
+	generateindexmasks(indexmask);
+
 	for(int i=0; i<42;i++) 
 	{	
 		double _prob = pow(10.0,-((double)i/10.0));
@@ -545,6 +575,7 @@ void setglobalarrays()
 	return;
 }
 
+/*
 void reorder(bitset *read, bbhashdict *dict)
 {
 	omp_lock_t *dict_lock = new omp_lock_t [num_locks];
@@ -805,86 +836,42 @@ void reorder(bitset *read, bbhashdict *dict)
 	return;
 }
 
+*/
 
-void generatemasks(bitset *mask,bitset *revmask)
-{
-	for(int i = 0; i < maxshift; i++)
-	{	
-		mask[i].reset();
-		revmask[i].reset();
-		for(int j = 0; j < 2*readlen - 2*i; j++)
-			mask[i][j] = 1;
-		for(int j = 2*i; j < 2*readlen; j++)
-			revmask[i][j] = 1; 	
-	}
-	return;
-}
+// void bitsettostring(bitset b,char *s)
+// {
+// 	unsigned long long ull,rem;
+// 	for(int i = 0; i < 2*readlen/64+1; i++)
+// 	{	
+// 		ull = (b&mask64).to_ullong();
+// 		b>>=64;
+// 		for(int j = 32*i  ; j < 32*i+32 && j < readlen ; j++)
+// 		{
+// 			s[j] = revinttochar[ull%4];	
+// 			ull/=4;
+// 		}
+// 	}
+// 	return;
+// }
 
+// bitset chartobitset(char *s)
+// {
+// 	bitset b;
+// 	for(int i = 0; i < readlen; i++)
+// 		b |= basemask[i][s[i]];
+// 	return b;
+// }
 
-
-void bitsettostring(bitset b,char *s)
-{
-	unsigned long long ull,rem;
-	for(int i = 0; i < 2*readlen/64+1; i++)
-	{	
-		ull = (b&mask64).to_ullong();
-		b>>=64;
-		for(int j = 32*i  ; j < 32*i+32 && j < readlen ; j++)
-		{
-			s[j] = revinttochar[ull%4];	
-			ull/=4;
-		}
-	}
-	return;
-}
-
-bitset chartobitset(char *s)
-{
-	bitset b;
-	for(int i = 0; i < readlen; i++)
-		b |= basemask[i][s[i]];
-	return b;
-}
-
-void reverse_complement(char* s, char* s1)
-{
-	for(int j = 0; j < readlen; j++)
-		s1[j] = chartorevchar[s[readlen-j-1]];
-	return;
-}
+// void reverse_complement(char* s, char* s1)
+// {
+// 	for(int j = 0; j < readlen; j++)
+// 		s1[j] = chartorevchar[s[readlen-j-1]];
+// 	return;
+// }
 
 
 
-
-std::string bitsettostring(bitset b)
-{
-	char s[readlen+1];
-	s[readlen] = '\0';
-	unsigned long long ull,rem;
-	for(int i = 0; i < 3*readlen/63+1; i++)
-	{	
-		ull = (b&mask63).to_ullong();
-		b>>=63;
-		for(int j = 21*i  ; j < 21*i+21 && j < readlen ; j++)
-		{
-			s[j] = revinttochar[ull%8];	
-			ull/=8;
-		}
-	}
-	std::string s1 = s;
-	return s1;
-}
-
-
-std::string reverse_complement(std::string s)
-{
-	std::string s1(s);
-	for(int j = 0; j < readlen; j++)
-		s1[j] = chartorevchar[s[readlen-j-1]];
-	return s1;
-}
-
-float alternate_thresh = 0.0;
+/*float alternate_thresh = 0.0;
 bitset stringtobitset(std::string s);
 
 std::string bitsettostring(bitset b);
@@ -1464,17 +1451,4 @@ void writecontig(std::vector<std::array<long,5>> count, std::list<long> &pos, st
 	return;
 }
 
-
-void generateindexmasks(bitset *mask1)
-//masks for dictionary positions
-{
-	for(int j = 0; j < numdict_s; j++)
-		mask1[j].reset();
-	for(int j = 0; j < numdict_s; j++)
-		for(int i = 3*dict_start[j]; i < 3*(dict_end[j]+1); i++)
-			mask1[j][i] = 1;
-	return;
-}
-
-
-
+*/
