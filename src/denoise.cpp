@@ -176,20 +176,24 @@ void denoise(bitset *read, char(*quality)[readlen+1], bbhashdict *dict)
 		stop = numreads;
 	std::ofstream fout(outfile+'.'+std::to_string(tid));
 	std::ofstream fout_quality(outfile_quality+'.'+std::to_string(tid));
+		std::vector<std::string> overlap_reads;//reads overlapping with current read
+		std::vector<int> overlap_shift;//shift of overlapping reads wrt current read - 0 for current read, -ve for reads on left
+		std::vector<std::string> overlap_quality;//qualities of overlapping reads (reversed if read was reversed)
 	while(i < stop)
 	{
 		bitset current_bitset = read[i];
 		std::string current_quality = quality[i];
-		std::vector<std::string> overlap_reads;//reads overlapping with current read
-		std::vector<int> overlap_shift;//shift of overlapping reads wrt current read - 0 for current read, -ve for reads on left
-		std::vector<std::string> overlap_quality;//qualities of overlapping reads (reversed if read was reversed)
+
 		find_overlapping_reads(i, current_bitset,current_quality,overlap_reads,overlap_shift,overlap_quality,read,quality,dict);
 		std::string current_read = bitsettostring(current_bitset);
 		std::string denoised_read = current_read, denoised_quality = current_quality;
 		denoise_read(current_read, current_quality,denoised_read,denoised_quality,overlap_reads,overlap_shift,overlap_quality);
 		fout << denoised_read << "\n";
 		fout_quality << denoised_quality << "\n";
-		i++;	
+		i++;
+		overlap_reads.clear();
+		overlap_shift.clear();	
+		overlap_quality.clear();	
 	}
 	fout.close();
 	fout_quality.close();
@@ -242,6 +246,7 @@ void denoise_read(std::string &current_read, std::string &current_quality, std::
             startposa = readlen -  matchlen;
         }
         read_weight = 1 - sqrt((double)string_hamming(current_read,*reads_it,startposa,startposb,matchlen)/(matchlen*0.25));
+//	read_weight = 1;
         if(read_weight < 0)
                 read_weight = 0;
         for(int i = 0; i < matchlen; i++)
