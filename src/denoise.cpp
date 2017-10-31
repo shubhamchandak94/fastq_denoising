@@ -114,7 +114,6 @@ int main(int argc, char** argv)
 	param1 = atof(argv[3]);
 	param2 = atof(argv[4]);
 	param3 = atof(argv[5]);
-
 	std::ifstream f_numreads(infilenumreads, std::ios::binary);
 	f_numreads.read((char*)&numreads,sizeof(uint32_t));	
 	omp_set_num_threads(num_thr);	
@@ -185,7 +184,8 @@ void denoise(bitset *read, char(*quality)[readlen+1], std::unordered_map<uint64_
 		i++;
 		overlap_reads.clear();
 		overlap_shift.clear();	
-		overlap_quality.clear();	
+		overlap_quality.clear();
+		overlap_RC.clear();	
 	}
 	fout.close();
 	fout_quality.close();
@@ -355,7 +355,7 @@ void find_overlapping_reads_at_shift(int shift, bool rev, bitset &current_bitset
 		if(dict[l].count(ull) == 1)
 		{
 		auto s = dict[l][ull];
-			for (int64_t i = s[0] - 1; i >=1 && i >= s[0] - maxsearch ; i--)
+			for (int64_t i = s[0] - 1; i >=1 && i >= long(s[0]) - maxsearch ; i--)
 			{
 				auto rid = s[i];
 				if((current_bitset^(read[rid]&readmask)).count()<=param1)
