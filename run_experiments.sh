@@ -2,14 +2,29 @@
 
 mkdir $1.log_folder
 #
-denoising_stats_log="log" #$1.log_folder/"overall_denoising_karect_style.log_file"
-#
-for t in 8
+denoising_stats_log="log_1" #$1.log_folder/"overall_denoising_karect_style.log_file"
+karect_tool=/data/shubham/assembly/karect/karect
+
+#/usr/bin/time -v $karect_tool -correct -inputfile=$1"_1.fastq" -inputfile=$1"_2.fastq" -resultdir=assembly_data -celltype=diploid -matchtype=hamming -threads=32 | tee $1".karect_log"
+#$karect_tool -align -threads=32 -matchtype=hamming -inputfile=$1"_1.fastq" -inputfile=$1"_2.fastq" -refgenomefile=assembly_data/c_elegans.PRJNA13758.WS241.uppercase.genomic.fa -alignfile=$1"_align.txt"          
+
+#$karect_tool -eval -threads=32 -matchtype=hamming -inputfile=$1"_1.fastq" -inputfile=$1"_2.fastq" -resultfile="assembly_data/karect_SRR823377_1.fastq" -resultfile="assembly_data/karect_SRR823377_2.fastq" -refgenomefile=assembly_data/c_elegans.PRJNA13758.WS241.uppercase.genomic.fa -alignfile=$1"_align.txt" -evalfile=$1"_karect.eval.txt" | tee $1.log_folder/"karect_summary.txt"          
+
+
+for t in 4 8 12
 do
-for n in 6 7 8 9 10
+	for n in 4 8 12 16 
         do
-	    ./denoise -d $1".fastq" -t 64 -1 $t -2 $n
-            ./util/get_denoising_stats.out $1 "t"$t."n"$n >> $denoising_stats_log
+		for param3 in 0.95 0.9 0.85
+		do
+			for param4 in 20 30 50 70 
+	    		do	
+				./denoise -d $1".fastq" -t 32 -1 $t -2 $n -3 $param3 -4 $param4
+	    #util/combine_into_fastq.out $1
+	    #/data/shubham/assembly/karect/karect -eval -threads=32 -matchtype=hamming -inputfile=$1"_1.fastq" -inputfile=$1"_2.fastq" -resultfile=$1"_1.harc.fastq" -resultfile=$1"_2.harc.fastq" -refgenomefile=assembly_data/c_elegans.PRJNA13758.WS241.uppercase.genomic.fa -alignfile=$1"_align.txt" -evalfile=$1"_t"$t"_n"$n"_eval.txt" | tee $1.log_folder/"t"$t"_n"$n"alpha_0.8_maxnum50_summary.txt"          
+				./util/get_denoising_stats.out $1 "t"$t."n"$n".alpha"$param3".maxlimit"$param4 >> $denoising_stats_log
+			done
+		done
         done 
 done
 
