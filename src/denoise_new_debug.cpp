@@ -5,6 +5,7 @@
 #include <vector>
 #include <array>
 #include <unordered_map>
+#include <unordered_set>
 #include <algorithm>
 #include <cstring>
 #include <string>
@@ -31,6 +32,7 @@ struct overlap
 {
 	char *read;
 	int shift;
+	uint32_t hamming;
 	double weight;
 	char *quality;
 	uint32_t rid;
@@ -66,14 +68,15 @@ double one_minus_p[42];
 char(*read_char)[readlen+1];
 char(*read_char_RC)[readlen+1];
 
+bool check_error_free(const char *denoised_read, std::vector<overlap> &overlap_vec, bool shift_0);
 
 void denoise(bitset *read, char(*quality)[readlen+1], std::unordered_map<uint64_t,uint32_t*> *dict);
 
 void denoise_read(char *current_read, char *current_quality, char *denoised_read, char *denoised_quality ,std::vector<overlap> &overlap_vec);
 
-void find_overlapping_reads(uint32_t &current_rid, bitset &current_bitset, char *current_quality, std::vector<overlap> &overlap_vec, bitset *read, char(*quality)[readlen+1], std::unordered_map<uint64_t,uint32_t*> *dict, bool *added_rids);
+bool find_overlapping_reads(uint32_t &current_rid, bitset &current_bitset, char *current_quality, std::vector<overlap> &overlap_vec, bitset *read, char(*quality)[readlen+1], std::unordered_map<uint64_t,uint32_t*> *dict, bool *added_rids);
 
-void find_overlapping_reads_at_shift(int shift, bool rev, bitset &current_bitset, char *current_quality, std::vector<overlap> &overlap_vec, bitset *read, char(*quality)[readlen+1], std::unordered_map<uint64_t,uint32_t*> *dict, uint32_t &current_rid, bool *added_rids);
+int find_overlapping_reads_at_shift(int shift, bool rev, bitset &current_bitset, char *current_quality, std::vector<overlap> &overlap_vec, bitset *read, char(*quality)[readlen+1], std::unordered_map<uint64_t,uint32_t*> *dict, uint32_t &current_rid, bool *added_rids);
 
 void readDnaFile(bitset *read);
 
@@ -83,7 +86,7 @@ void constructdictionary(bitset *read, std::unordered_map<uint64_t,uint32_t*> *d
 
 void findMajority(std::vector<std::array<double,5>> &count, char *denoised_read);
 
-int string_hamming(char *a, char *b, int &startposa, int &startposb, int &matchlen);
+int string_hamming(const char *a, const char *b, int startposa, int startposb, int matchlen);
 //compute hamming distance between a[startposa:startposa+matchlen] and b[startposb:startposb+matchlen]
 
 bitset chartobitset(char *s);
@@ -170,57 +173,56 @@ void denoise(bitset *read, char(*quality)[readlen+1], std::unordered_map<uint64_
 		stop = numreads;
 	std::ofstream fout(outfile+'.'+std::to_string(tid));
 	std::ofstream fout_quality(outfile_quality+'.'+std::to_string(tid));
-	std::ofstream fout_overlap(outfile+".overlap."+std::to_string(tid));	
+	std::ofstream fout_overlap(outfile+".overlap."+std::to_string(tid));
+	std::ifstream fin_clean("/srv/data/shubham/assembly/fastq_denoising/assembly_data/c_elegans_c25_100_180.upper.clean");
+	fin_clean.seekg(uint64_t(i)*(readlen+1), fin_clean.beg);
+	char clean_read[readlen+1];
 	std::vector<overlap> overlap_vec;
 
 	bitset current_bitset;
 	char current_quality[readlen+1], current_read[readlen+1], denoised_read[readlen+1], denoised_quality[readlen+1];
 	bool *added_rids = new bool [numreads];
 	std::fill(added_rids, added_rids+numreads,false);
-
-	///////// DEBUG mode 
-	uint32_t stop_print = i + 1000;
-	//
+	bool exact_match_found;
 	while(i < stop)
 	{
+		fin_clean.getline(clean_read,readlen+1);
 		current_bitset = read[i];
 
 		strcpy(current_quality,quality[i]);
 
-		find_overlapping_reads(i, current_bitset,current_quality,overlap_vec,read,quality,dict,added_rids);
-		
+		exact_match_found = find_overlapping_reads(i, current_bitset,current_quality,overlap_vec,read,quality,dict,added_rids);
 		strcpy(current_read, read_char[i]);
-		
-		////////////////
-		// In debug mode
-		//	
-		////////////////
-/*		if( i < stop_print)
-		{
-			////////// DEBUG mode
-		     	std::sort(overlap_vec.begin(), overlap_vec.end(), [](overlap read1, overlap read2) {
-		          	return read1.shift < read2.shift;   
-		        });
-			
-			fout_overlap << current_read << "\n";		
-			for(std::vector<overlap>::iterator it = overlap_vec.begin() ; it != overlap_vec.end(); ++it)
-			{
-				fout_overlap << std::string(maxshift+(*it).shift, '*') << (*it).read << "\n";  		
-			}	
-		}
-*/		///////////////////
+
 		strcpy(denoised_quality,current_quality);
 		strcpy(denoised_read,current_read);
-		
-		denoise_read(current_read, current_quality,denoised_read,denoised_quality,overlap_vec);
+		if(exact_match_found == false)
+			denoise_read(current_read, current_quality,denoised_read,denoised_quality,overlap_vec);
 		fout << denoised_read << "\n";
 		fout_quality << denoised_quality << "\n";
+		if(strcmp(clean_read,denoised_read) != 0)
+		{
+			if(exact_match_found) std::cout << 0;
+			else std::cout << 1;
+/*				
+			////////// DEBUG mode
+			fout_overlap << std::string(100, '#') << "\n";
+			std::sort(overlap_vec.begin(), overlap_vec.end(), [](overlap read1, overlap read2) {
+				return read1.shift < read2.shift;
+			});
+			fout_overlap << clean_read << "\n";
+			fout_overlap << current_read << "\n";
+			fout_overlap << denoised_read << "\n";
+			for(std::vector<overlap>::iterator it = overlap_vec.begin() ; it != overlap_vec.end(); ++it)
+			{
+				fout_overlap << std::string(maxshift+(*it).shift, '*') << (*it).read << "\n";
+			}
+*/		}
 		i++;
 		overlap_vec.clear();
 	}
 	fout.close();
 	fout_quality.close();
-	fout_overlap.close();
 	}//parallel end
 
 	//combine files produced by the threads
@@ -244,12 +246,164 @@ void denoise(bitset *read, char(*quality)[readlen+1], std::unordered_map<uint64_
 	return;
 }
 
+bool check_error_free(const char *denoised_read, std::vector<overlap> &overlap_vec, bool shift_0)
+{
+	int startposa, startposb, matchlen;//variables for string_hamming
+	int countshift0 = 0, countshiftleft = 0, countshiftright = 0;
+	for(auto it = overlap_vec.begin(); it != overlap_vec.end(); ++it)
+	{
+		if((*it).shift <= 0)
+		{
+			startposa = 0;
+			matchlen = readlen + (*it).shift;
+			startposb = readlen -  matchlen;
+		}
+		else
+		{
+			startposb = 0;
+			matchlen = readlen - (*it).shift;
+			startposa = readlen -  matchlen;
+		}
+		if(string_hamming(denoised_read,(*it).read,startposa,startposb,matchlen) == 0)
+		{
+			if((*it).shift == 0)
+				countshift0++;
+			else if((*it).shift < 0)
+				countshiftleft++;
+			else
+				countshiftright++;
+		}
+		if(shift_0 && (countshift0 > 1 || (countshiftleft>0 && countshiftright>0)))
+			return true;
+		else if(!shift_0 &&(countshift0 > 0 || (countshiftleft>1 && countshiftright>1)))
+			return true;
+	}
+	return false;	
+} 
+
 void denoise_read(char *current_read, char *current_quality, char *denoised_read, char *denoised_quality ,std::vector<overlap> &overlap_vec)
-{        
+{       
+	int startposa, startposb, matchlen;//variables for string_hamming
+	//find hamming distances of all reads to current read
+	
+	for(auto it = overlap_vec.begin(); it != overlap_vec.end(); ++it)
+	{
+		if((*it).shift <= 0)
+		{
+			startposa = 0;
+			matchlen = readlen + (*it).shift;
+			startposb = readlen -  matchlen;
+		}
+		else
+		{
+			startposb = 0;
+			matchlen = readlen - (*it).shift;
+			startposa = readlen -  matchlen;
+		}
+		(*it).hamming = string_hamming(current_read,(*it).read,startposa,startposb,matchlen);
+	}
+	//sort overlap_vec as follows: first come all shift 0 reads in increasing hamming distance
+	//then come rest reads in increasing hamming distance (and incresing abs shift for same hamming distance)
+	std::sort(overlap_vec.begin(), overlap_vec.end(), [](overlap read1, overlap read2) {
+					if(read1.shift == 0)
+					{
+						if(read2.shift == 0)
+							return read1.hamming < read2.hamming;
+						else
+							return true;
+					}
+					else
+					{
+						if(read2.shift == 0)
+							return false;
+						else
+							if(read1.hamming == read2.hamming)
+								return std::abs(read1.shift) < std::abs(read2.shift);
+							else
+								return read1.hamming < read2.hamming;
+					}
+	});
+				
+	//first find closest error-free at shift 0 
+	char shift0_denoised[readlen+1];
+	int shift0_min_hamming = readlen;
+	auto it = overlap_vec.begin();
+	for(; it != overlap_vec.end(); ++it)
+	{
+		if((*it).shift != 0)
+			break;
+		if(check_error_free((*it).read, overlap_vec, true))
+		{
+			strcpy(shift0_denoised,(*it).read);
+			shift0_min_hamming = (*it).hamming;
+			break;
+		}
+	}
+
+	//now find error-free shifted reads by combining left and right portions
+	
+	struct read_hamming { 
+				std::string read;
+				int hamming;
+			 };	
+	std::vector<read_hamming> potential_reads;//this will store all possible reads formed by combinations of l and r reads
+	auto it_left = it;
+	auto it_right = it;
+	std::string temp_read;
+	std::unordered_set<std::string> seen_reads;
+	bool stop_flag = false;
+	for(;it_right!= overlap_vec.end(); ++it_right)
+	{	
+		if((*it_right).shift < 0)
+			continue;
+		for(it_left = it; it_left!= overlap_vec.end(); ++it_left)
+		{
+			if((*it_left).shift > 0)
+				continue;
+			if((*it_left).hamming >= shift0_min_hamming && (*it_right).hamming >= shift0_min_hamming)
+				continue;
+			int left_shift = -(*it_left).shift;
+			int right_shift = (*it_right).shift;
+			if(string_hamming((*it_left).read,(*it_right).read,left_shift+right_shift,0,readlen-left_shift-right_shift)==0)
+			//if these two match on their overlapping region
+			{
+				temp_read = std::string((*it_left).read).substr(left_shift,readlen-left_shift)+std::string((*it_right).read).substr(readlen-left_shift-right_shift,left_shift);
+				if(seen_reads.find(temp_read)==seen_reads.end())//not already seen this
+				{
+					seen_reads.insert(temp_read);
+					int hamming = string_hamming(temp_read.c_str(),current_read,0,0,readlen);
+					potential_reads.push_back({temp_read,hamming});
+				}	
+			}
+		}
+	}
+		
+	std::sort(potential_reads.begin(), potential_reads.end(), [](read_hamming read1, read_hamming read2) {
+					return read1.hamming < read2.hamming;
+	});
+	char shift_non0_denoised[readlen+1];	
+	int shift_non0_min_hamming = readlen;
+	for(auto it = potential_reads.begin(); it != potential_reads.end(); ++it)
+	{
+		if(check_error_free(((*it).read).c_str(), overlap_vec, false))
+		{
+			strcpy(shift_non0_denoised,((*it).read).c_str());
+			shift_non0_min_hamming = (*it).hamming;
+			break;
+		}
+	}
+	if(shift0_min_hamming == readlen && shift_non0_min_hamming == readlen)
+		return;
+	if(shift0_min_hamming <= shift_non0_min_hamming)
+		strcpy(denoised_read,shift0_denoised);
+	else if(shift0_min_hamming > shift_non0_min_hamming)
+		strcpy(denoised_read,shift_non0_denoised);
+	return;
+	/*
 	std::vector<std::array<double,5>> read_count(readlen,{0,0,0,0,0});
 	auto it = overlap_vec.begin();
 	double read_weight;
-	int startposa, startposb, matchlen;//variables for string_hamming
+
 	int quality_pos; // used for handling reverse complementation
 	// accumulate counts
 	
@@ -312,51 +466,60 @@ void denoise_read(char *current_read, char *current_quality, char *denoised_read
 		if(read_count[j][chartolong[current_read[j]]] > param2)
 			denoised_read[j] = current_read[j];
 	}
-	return;
+	return;*/
 }
 
-void find_overlapping_reads(uint32_t &current_rid, bitset &current_bitset, char *current_quality, std::vector<overlap> &overlap_vec, bitset *read, char(*quality)[readlen+1], std::unordered_map<uint64_t,uint32_t*> *dict, bool *added_rids)
+bool find_overlapping_reads(uint32_t &current_rid, bitset &current_bitset, char *current_quality, std::vector<overlap> &overlap_vec, bitset *read, char(*quality)[readlen+1], std::unordered_map<uint64_t,uint32_t*> *dict, bool *added_rids)
 {
+	bool exact_match_found = false;
 	bitset forward_bitset = current_bitset;
 	bitset reverse_bitset = chartobitset(read_char_RC[current_rid]);
+	int countshift0 = 0, countshiftleft = 0, countshiftright = 0;
 
 	//find matches at shift 0
-	find_overlapping_reads_at_shift(0, false, forward_bitset, current_quality, overlap_vec, read, quality, dict, current_rid, added_rids);
-	find_overlapping_reads_at_shift(0, true, reverse_bitset, current_quality, overlap_vec, read, quality, dict, current_rid, added_rids);
+	countshift0 += find_overlapping_reads_at_shift(0, false, forward_bitset, current_quality, overlap_vec, read, quality, dict, current_rid, added_rids);
+	countshift0 += find_overlapping_reads_at_shift(0, true, reverse_bitset, current_quality, overlap_vec, read, quality, dict, current_rid, added_rids);
+	if(countshift0 > 0)
+		exact_match_found = true;
 
         bitset forward_bitset_left = current_bitset;
         bitset reverse_bitset_left = chartobitset(read_char_RC[current_rid]);
         //find matches to right/left
+        if(countshift0 == 0)
         for(int shift = 1; shift < maxshift; shift++)
         {
                 forward_bitset >>= 3;
                 reverse_bitset <<= 3;
                 forward_bitset_left <<= 3;
                 reverse_bitset_left >>= 3;
-                find_overlapping_reads_at_shift(shift, false, forward_bitset, current_quality, overlap_vec, read, quality, dict, current_rid, added_rids);
-                find_overlapping_reads_at_shift(shift, true, reverse_bitset, current_quality, overlap_vec, read, quality, dict, current_rid, added_rids);
-                find_overlapping_reads_at_shift(-shift, false, forward_bitset_left, current_quality, overlap_vec, read, quality, dict, current_rid, added_rids);
-                find_overlapping_reads_at_shift(-shift, true, reverse_bitset_left, current_quality, overlap_vec, read, quality, dict, current_rid, added_rids);
+                countshiftright += find_overlapping_reads_at_shift(shift, false, forward_bitset, current_quality, overlap_vec, read, quality, dict, current_rid, added_rids);
+                countshiftright += find_overlapping_reads_at_shift(shift, true, reverse_bitset, current_quality, overlap_vec, read, quality, dict, current_rid, added_rids);
+                countshiftleft += find_overlapping_reads_at_shift(-shift, false, forward_bitset_left, current_quality, overlap_vec, read, quality, dict, current_rid, added_rids);
+                countshiftleft += find_overlapping_reads_at_shift(-shift, true, reverse_bitset_left, current_quality, overlap_vec, read, quality, dict, current_rid, added_rids);
+		if(countshiftright>0 && countshiftleft > 0 && countshift0 == 0)
+		{	exact_match_found = true;
+			break;
+		}
         }
 
 	//clear added_rids array now
 	for(auto it = overlap_vec.begin(); it != overlap_vec.end(); ++it)
 		added_rids[(*it).rid] = false;
 
-	return;
+	return exact_match_found;
 }
 
-void find_overlapping_reads_at_shift(int shift, bool rev, bitset &current_bitset, char *current_quality, std::vector<overlap> &overlap_vec, bitset *read, char(*quality)[readlen+1], std::unordered_map<uint64_t,uint32_t*> *dict, uint32_t &current_rid, bool *added_rids)
+int find_overlapping_reads_at_shift(int shift, bool rev, bitset &current_bitset, char *current_quality, std::vector<overlap> &overlap_vec, bitset *read, char(*quality)[readlen+1], std::unordered_map<uint64_t,uint32_t*> *dict, uint32_t &current_rid, bool *added_rids)
 {
 	int64_t dictidx[2];//to store the start and end index (end not inclusive) in the dict read_id array
 	uint32_t startposidx;//index in startpos
 	uint64_t ull;//for indexing dict
-
+	int count = 0;
 	//if shift is 0 and rev is false, add the current read
 	if(shift == 0 && rev == false)
 	{
 		added_rids[current_rid] = true;
-		overlap_vec.push_back({read_char[current_rid],0,0,quality[current_rid],current_rid,false});
+		overlap_vec.push_back({read_char[current_rid],0,0,0,quality[current_rid],current_rid,false});
 	}
 
 	bitset readmask;
@@ -413,21 +576,23 @@ void find_overlapping_reads_at_shift(int shift, bool rev, bitset &current_bitset
 					//std::cout << read_weight << std::endl;
 					if(added_rids[rid] == false)//not already present
 					{
+						if(read_hamming_distance == 0)
+							count++;
 						added_rids[rid] = true;
 						if(!rev)	
 						{
-							overlap_vec.push_back({read_char[rid],shift,read_weight,quality[rid],rid,false});
+							overlap_vec.push_back({read_char[rid],shift,0,read_weight,quality[rid],rid,false});
 						}
 						else
 						{
-							overlap_vec.push_back({read_char_RC[rid],shift,read_weight,quality[rid],rid,true});
+							overlap_vec.push_back({read_char_RC[rid],shift,0,read_weight,quality[rid],rid,true});
 						}	
 					}
 				}
 			}
 		}
 	}
-	return;
+	return count;
 }
 
 void readDnaFile(bitset *read)
@@ -572,7 +737,7 @@ int string_hamming(std::string &a, std::string &b, int &startposa, int &startpos
             dist++;
     return dist;
 }*/
-int string_hamming(char *a, char *b, int &startposa, int &startposb, int &matchlen)
+int string_hamming(const char *a, const char *b, int startposa, int startposb, int matchlen)
 {
     int dist = 0;
     for(int k = 0; k < matchlen; k++)
