@@ -173,10 +173,6 @@ void denoise(bitset *read, char(*quality)[readlen+1], std::unordered_map<uint64_
 	std::ofstream fout(outfile+'.'+std::to_string(tid));
 	std::ofstream fout_quality(outfile_quality+'.'+std::to_string(tid));
 	std::vector<overlap> overlap_vec;
-	std::ofstream fout_overlap(outfile+".overlap."+std::to_string(tid));
-	std::ifstream fin_clean("/srv/data/shubham/assembly/fastq_denoising/assembly_data/c_elegans_c25_100_180.upper.clean");
-	fin_clean.seekg(uint64_t(i)*(readlen+1), fin_clean.beg);
-	char clean_read[readlen+1];
 
 	bitset current_bitset;
 	char current_quality[readlen+1], current_read[readlen+1], denoised_read[readlen+1], denoised_quality[readlen+1];
@@ -185,7 +181,6 @@ void denoise(bitset *read, char(*quality)[readlen+1], std::unordered_map<uint64_
 	bool exact_match_found;
 	while(i < stop)
 	{
-		fin_clean.getline(clean_read,readlen+1);
 		current_bitset = read[i];
 
 		strcpy(current_quality,quality[i]);
@@ -196,44 +191,6 @@ void denoise(bitset *read, char(*quality)[readlen+1], std::unordered_map<uint64_
 		strcpy(denoised_quality,current_quality);
 		strcpy(denoised_read,current_read);
 		denoise_read(current_read, current_quality,denoised_read,denoised_quality,overlap_vec);
-		if(strcmp(clean_read,denoised_read) != 0)
-		{
-			////////// DEBUG mode
-			fout_overlap << std::string(100, '#') << "\n";
-
-			fout_overlap << clean_read << "\n";
-			fout_overlap << current_read << "\n";
-			fout_overlap << denoised_read << "\n";
-			fout_overlap << std::string(100, '#') << "\n";
-			fout_overlap << clean_read << "\n";
-			for( int j = 0; j < readlen; j++)
-			{
-				if(current_read[j] != clean_read[j])
-					fout_overlap << current_read[j];
-				else
-					fout_overlap << "-";
-			}
-			fout_overlap << "\n";
-			for( int j = 0; j < readlen; j++)
-			{
-				if(denoised_read[j] != clean_read[j])
-					fout_overlap << denoised_read[j];
-				else
-					fout_overlap << "-";
-			}
-			fout_overlap << "\n";
-//			for(auto it = overlap_vec.begin(); it != overlap_vec.end(); ++it)
-//				fout_overlap << (*it).hamming << "\t";
-//			fout_overlap << "\n";
-//			std::sort(overlap_vec.begin(), overlap_vec.end(), [](overlap read1, overlap read2) {
-//				return read1.shift < read2.shift;
-//			});
-				
-			for(std::vector<overlap>::iterator it = overlap_vec.begin() ; it != overlap_vec.end(); ++it)
-			{
-				fout_overlap << std::string(maxshift+(*it).shift, '*') << (*it).read << "\t" << (*it).hamming << "\n";
-			}
-		}
 		fout << denoised_read << "\n";
 		fout_quality << denoised_quality << "\n";
 		i++;
@@ -313,7 +270,7 @@ void denoise_read(char *current_read, char *current_quality, char *denoised_read
 			if(denoised_bases[startposa+i])
 				continue;
 			read_count[startposa+i][chartolong[((*it).read)[startposb+i]]] += 1;
-			total_count[startposa+i]++;
+			total_count[startposa+i] += 1;
 			if((read_count[startposa+i][chartolong[((*it).read)[startposb+i]]]+0.25)/(total_count[startposa+i]+1) >= param4 && total_count[startposa+i]>param5)
 			{
 				denoised_read[startposa+i] = ((*it).read)[startposb+i];	
@@ -323,6 +280,64 @@ void denoise_read(char *current_read, char *current_quality, char *denoised_read
 		}
 		if(num_bases_denoised == readlen)
 			break;
+	}
+	//Now repeat the process above by making the denoised read the current read
+	{
+		
+	for(auto it = overlap_vec.begin(); it != overlap_vec.end(); ++it)
+	{
+		if((*it).shift <= 0)
+		{
+			startposa = 0;
+			matchlen = readlen + (*it).shift;
+			startposb = readlen -  matchlen;
+		}
+		else
+		{
+			startposb = 0;
+			matchlen = readlen - (*it).shift;
+			startposa = readlen -  matchlen;
+		}
+		(*it).hamming = string_hamming(denoised_read,(*it).read,startposa,startposb,matchlen);
+	}
+	//sort overlap_vec in increasing hamming distance. For same hamming distance, higher priority to less shift
+	std::sort(overlap_vec.begin(), overlap_vec.end(), [](overlap read1, overlap read2) {
+					return (read1.hamming==read2.hamming)?(std::abs(read1.shift)<std::abs(read2.shift)):(read1.hamming<read2.hamming);
+	});	
+	std::vector<std::array<double,5>> read_count(readlen,{0,0,0,0,0});
+	std::vector<double> total_count(readlen,0);
+	int num_bases_denoised = 0;
+	std::vector<int> denoised_bases(readlen,0);
+	for(auto it = overlap_vec.begin(); it != overlap_vec.end(); ++it)
+	{
+		if((*it).shift <= 0)
+		{
+			startposa = 0;
+			matchlen = readlen + (*it).shift;
+			startposb = readlen -  matchlen;
+		}
+		else
+		{
+			startposb = 0;
+			matchlen = readlen - (*it).shift;
+			startposa = readlen -  matchlen;
+		}
+		for(int i = 0; i < matchlen; i++)
+		{
+			if(denoised_bases[startposa+i])
+				continue;
+			read_count[startposa+i][chartolong[((*it).read)[startposb+i]]] += 1;
+			total_count[startposa+i] += 1;
+			if((read_count[startposa+i][chartolong[((*it).read)[startposb+i]]]+0.25)/(total_count[startposa+i]+1) >= param4 && total_count[startposa+i]>param5)
+			{
+				denoised_read[startposa+i] = ((*it).read)[startposb+i];	
+				denoised_bases[startposa+i] = 1;
+				num_bases_denoised++;	
+			}
+		}
+		if(num_bases_denoised == readlen)
+			break;
+	}
 	}
 	return;
 }

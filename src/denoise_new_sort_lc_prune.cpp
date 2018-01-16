@@ -18,7 +18,7 @@ typedef std::bitset<3*readlen> bitset;
 
 uint32_t numreads = 0;
 std::string mode;
-double param1, param2, param3, param4, param5;
+double param1, param2, param3, param4, param5, param6;
 
 std::string infilenumreads;
 
@@ -32,7 +32,7 @@ struct overlap
 {
 	char *read;
 	int shift;
-	uint32_t hamming;
+	double hamming;
 	double weight;
 	char *quality;
 	uint32_t rid;
@@ -127,6 +127,7 @@ int main(int argc, char** argv)
 	param3 = atof(argv[5]); //alpha
 	param4 = atof(argv[6]); //max number thresh
 	param5 = atof(argv[7]); //max number thresh
+	param6 = atof(argv[8]); //max number thresh
 	std::ifstream f_numreads(infilenumreads, std::ios::binary);
 	f_numreads.read((char*)&numreads,sizeof(uint32_t));	
 	omp_set_num_threads(num_thr);	
@@ -173,10 +174,6 @@ void denoise(bitset *read, char(*quality)[readlen+1], std::unordered_map<uint64_
 	std::ofstream fout(outfile+'.'+std::to_string(tid));
 	std::ofstream fout_quality(outfile_quality+'.'+std::to_string(tid));
 	std::vector<overlap> overlap_vec;
-	std::ofstream fout_overlap(outfile+".overlap."+std::to_string(tid));
-	std::ifstream fin_clean("/srv/data/shubham/assembly/fastq_denoising/assembly_data/c_elegans_c25_100_180.upper.clean");
-	fin_clean.seekg(uint64_t(i)*(readlen+1), fin_clean.beg);
-	char clean_read[readlen+1];
 
 	bitset current_bitset;
 	char current_quality[readlen+1], current_read[readlen+1], denoised_read[readlen+1], denoised_quality[readlen+1];
@@ -185,7 +182,6 @@ void denoise(bitset *read, char(*quality)[readlen+1], std::unordered_map<uint64_
 	bool exact_match_found;
 	while(i < stop)
 	{
-		fin_clean.getline(clean_read,readlen+1);
 		current_bitset = read[i];
 
 		strcpy(current_quality,quality[i]);
@@ -196,44 +192,6 @@ void denoise(bitset *read, char(*quality)[readlen+1], std::unordered_map<uint64_
 		strcpy(denoised_quality,current_quality);
 		strcpy(denoised_read,current_read);
 		denoise_read(current_read, current_quality,denoised_read,denoised_quality,overlap_vec);
-		if(strcmp(clean_read,denoised_read) != 0)
-		{
-			////////// DEBUG mode
-			fout_overlap << std::string(100, '#') << "\n";
-
-			fout_overlap << clean_read << "\n";
-			fout_overlap << current_read << "\n";
-			fout_overlap << denoised_read << "\n";
-			fout_overlap << std::string(100, '#') << "\n";
-			fout_overlap << clean_read << "\n";
-			for( int j = 0; j < readlen; j++)
-			{
-				if(current_read[j] != clean_read[j])
-					fout_overlap << current_read[j];
-				else
-					fout_overlap << "-";
-			}
-			fout_overlap << "\n";
-			for( int j = 0; j < readlen; j++)
-			{
-				if(denoised_read[j] != clean_read[j])
-					fout_overlap << denoised_read[j];
-				else
-					fout_overlap << "-";
-			}
-			fout_overlap << "\n";
-//			for(auto it = overlap_vec.begin(); it != overlap_vec.end(); ++it)
-//				fout_overlap << (*it).hamming << "\t";
-//			fout_overlap << "\n";
-//			std::sort(overlap_vec.begin(), overlap_vec.end(), [](overlap read1, overlap read2) {
-//				return read1.shift < read2.shift;
-//			});
-				
-			for(std::vector<overlap>::iterator it = overlap_vec.begin() ; it != overlap_vec.end(); ++it)
-			{
-				fout_overlap << std::string(maxshift+(*it).shift, '*') << (*it).read << "\t" << (*it).hamming << "\n";
-			}
-		}
 		fout << denoised_read << "\n";
 		fout_quality << denoised_quality << "\n";
 		i++;
@@ -284,7 +242,7 @@ void denoise_read(char *current_read, char *current_quality, char *denoised_read
 			matchlen = readlen - (*it).shift;
 			startposa = readlen -  matchlen;
 		}
-		(*it).hamming = string_hamming(current_read,(*it).read,startposa,startposb,matchlen);
+		(*it).hamming = (double)(string_hamming(current_read,(*it).read,startposa,startposb,matchlen)+param6)/matchlen;
 	}
 	//sort overlap_vec in increasing hamming distance. For same hamming distance, higher priority to less shift
 	std::sort(overlap_vec.begin(), overlap_vec.end(), [](overlap read1, overlap read2) {
@@ -293,6 +251,8 @@ void denoise_read(char *current_read, char *current_quality, char *denoised_read
 	std::vector<std::array<double,5>> read_count(readlen,{0,0,0,0,0});
 	std::vector<double> total_count(readlen,0);
 	int num_bases_denoised = 0;
+	int num_bases_corrected = 0;
+	int smallest_base_corrected = readlen;
 	std::vector<int> denoised_bases(readlen,0);
 	for(auto it = overlap_vec.begin(); it != overlap_vec.end(); ++it)
 	{
@@ -313,16 +273,44 @@ void denoise_read(char *current_read, char *current_quality, char *denoised_read
 			if(denoised_bases[startposa+i])
 				continue;
 			read_count[startposa+i][chartolong[((*it).read)[startposb+i]]] += 1;
-			total_count[startposa+i]++;
+			total_count[startposa+i] += 1;
 			if((read_count[startposa+i][chartolong[((*it).read)[startposb+i]]]+0.25)/(total_count[startposa+i]+1) >= param4 && total_count[startposa+i]>param5)
 			{
 				denoised_read[startposa+i] = ((*it).read)[startposb+i];	
 				denoised_bases[startposa+i] = 1;
+
 				num_bases_denoised++;	
 			}
 		}
 		if(num_bases_denoised == readlen)
 			break;
+	}
+	//for bases with very low count (<= param5), denoise if n-1 are same
+	for(int i = 0; i < readlen; i++)
+	{
+		if(total_count[i] <= param5)
+		{
+			for(int j = 0; j < 4; j++)
+				if(read_count[i][j] == total_count[i]-1 && read_count[i][j]>1)
+				{
+					denoised_read[i] = inttochar[j];
+					break;
+				}
+		}
+	}
+	for(int i = readlen-1; i > readlen/2; i--)
+	{
+		if(denoised_read[i] != current_read[i])
+		{
+			num_bases_corrected++;
+			smallest_base_corrected = i;
+		}
+	}
+	if(num_bases_corrected>=5)
+	{
+		//truncate read and quality
+		denoised_read[smallest_base_corrected] = '\0';
+		denoised_quality[smallest_base_corrected] = '\0';		
 	}
 	return;
 }
@@ -743,7 +731,25 @@ void setglobalarrays()
 		dict_start[3] = dict4_start;
 		dict_end[3] = dict4_end;
 	}
+	#elif numdict == 6
+	{
+		dict_start = new int[6];
+		dict_end = new int[6];
+		dict_start[0] = dict1_start;
+		dict_end[0] = dict1_end;
+		dict_start[1] = dict2_start;
+		dict_end[1] = dict2_end;
+		dict_start[2] = dict3_start;
+		dict_end[2] = dict3_end;
+		dict_start[3] = dict4_start;
+		dict_end[3] = dict4_end;
+		dict_start[4] = dict5_start;
+		dict_end[4] = dict5_end;
+		dict_start[5] = dict6_start;
+		dict_end[5] = dict6_end;
+	}
 	#endif
+
 	for(int i = 0; i < 63; i++)
 		mask63[i] = 1;
 	for(int i = 0; i < readlen; i++)

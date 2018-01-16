@@ -1,0 +1,21 @@
+
+t16.maxshift50.maxsearch20.param4:0.6.param5:3_new_sort_lc
+Original Errors: 281132780
+Undetected Errors: 3008717
+Incorrectly Denoised: 108718
+New Errors: 360696
+Total Errors after Denoising; 3478131
+
+RECKONER
+Original Errors: 281132780
+Undetected Errors: 3491502
+Incorrectly Denoised: 356137
+New Errors: 1266590
+Total Errors after Denoising; 5114229
+
+karect
+Original Errors: 281132780
+Undetected Errors: 1043468
+Incorrectly Denoised: 255320
+New Errors: 1552821
+Total Errors after Denoising; 2851609

@@ -1,0 +1,1393 @@
+
+t4.n4.alpha0.95.maxlimit20
+Original Errors: 9453553
+Undetected Errors: 9453553
+Incorrectly Denoised: 0
+New Errors: 0
+Total Errors after Denoising; 9453553
+
+t4.n4.alpha0.95.maxlimit30
+Original Errors: 9453553
+Undetected Errors: 9453553
+Incorrectly Denoised: 0
+New Errors: 0
+Total Errors after Denoising; 9453553
+
+t4.n4.alpha0.95.maxlimit50
+Original Errors: 9453553
+Undetected Errors: 9453553
+Incorrectly Denoised: 0
+New Errors: 0
+Total Errors after Denoising; 9453553
+
+t4.n4.alpha0.95.maxlimit70
+Original Errors: 9453553
+Undetected Errors: 9453553
+Incorrectly Denoised: 0
+New Errors: 0
+Total Errors after Denoising; 9453553
+
+t4.n4.alpha0.9.maxlimit20
+Original Errors: 9453553
+Undetected Errors: 9453553
+Incorrectly Denoised: 0
+New Errors: 0
+Total Errors after Denoising; 9453553
+
+t4.n4.alpha0.9.maxlimit30
+Original Errors: 9453553
+Undetected Errors: 9453553
+Incorrectly Denoised: 0
+New Errors: 0
+Total Errors after Denoising; 9453553
+
+t4.n4.alpha0.9.maxlimit50
+Original Errors: 9453553
+Undetected Errors: 9453553
+Incorrectly Denoised: 0
+New Errors: 0
+Total Errors after Denoising; 9453553
+
+t4.n4.alpha0.95.maxlimit20
+Original Errors: 9453553
+Undetected Errors: 386759
+Incorrectly Denoised: 1718
+New Errors: 5474
+Total Errors after Denoising; 393951
+
+t4.n4.alpha0.95.maxlimit30
+Original Errors: 9453553
+Undetected Errors: 338314
+Incorrectly Denoised: 2059
+New Errors: 5417
+Total Errors after Denoising; 345790
+
+t4.n4.alpha0.95.maxlimit50
+Original Errors: 9453553
+Undetected Errors: 311673
+Incorrectly Denoised: 2777
+New Errors: 4959
+Total Errors after Denoising; 319409
+
+t4.n4.alpha0.95.maxlimit70
+Original Errors: 9453553
+Undetected Errors: 299635
+Incorrectly Denoised: 3185
+New Errors: 4337
+Total Errors after Denoising; 307157
+
+t4.n4.alpha0.9.maxlimit20
+Original Errors: 9453553
+Undetected Errors: 293256
+Incorrectly Denoised: 1968
+New Errors: 22097
+Total Errors after Denoising; 317321
+
+t4.n4.alpha0.9.maxlimit30
+Original Errors: 9453553
+Undetected Errors: 281601
+Incorrectly Denoised: 2392
+New Errors: 16827
+Total Errors after Denoising; 300820
+
+t4.n4.alpha0.9.maxlimit50
+Original Errors: 9453553
+Undetected Errors: 274930
+Incorrectly Denoised: 3010
+New Errors: 11269
+Total Errors after Denoising; 289209
+
+t4.n4.alpha0.9.maxlimit70
+Original Errors: 9453553
+Undetected Errors: 272762
+Incorrectly Denoised: 3319
+New Errors: 8590
+Total Errors after Denoising; 284671
+
+t4.n4.alpha0.85.maxlimit20
+Original Errors: 9453553
+Undetected Errors: 268284
+Incorrectly Denoised: 2312
+New Errors: 50225
+Total Errors after Denoising; 320821
+
+t4.n4.alpha0.85.maxlimit30
+Original Errors: 9453553
+Undetected Errors: 265818
+Incorrectly Denoised: 2729
+New Errors: 35470
+Total Errors after Denoising; 304017
+
+t4.n4.alpha0.85.maxlimit50
+Original Errors: 9453553
+Undetected Errors: 265684
+Incorrectly Denoised: 3248
+New Errors: 21409
+Total Errors after Denoising; 290341
+
+t4.n4.alpha0.85.maxlimit70
+Original Errors: 9453553
+Undetected Errors: 266394
+Incorrectly Denoised: 3513
+New Errors: 15068
+Total Errors after Denoising; 284975
+
+t4.n8.alpha0.95.maxlimit20
+Original Errors: 9453553
+Undetected Errors: 384428
+Incorrectly Denoised: 1729
+New Errors: 25528
+Total Errors after Denoising; 411685
+
+t4.n8.alpha0.95.maxlimit30
+Original Errors: 9453553
+Undetected Errors: 333566
+Incorrectly Denoised: 2082
+New Errors: 33759
+Total Errors after Denoising; 369407
+
+t4.n8.alpha0.95.maxlimit50
+Original Errors: 9453553
+Undetected Errors: 305107
+Incorrectly Denoised: 2834
+New Errors: 40059
+Total Errors after Denoising; 348000
+
+t4.n8.alpha0.95.maxlimit70
+Original Errors: 9453553
+Undetected Errors: 291978
+Incorrectly Denoised: 3266
+New Errors: 39170
+Total Errors after Denoising; 334414
+
+t4.n8.alpha0.9.maxlimit20
+Original Errors: 9453553
+Undetected Errors: 290116
+Incorrectly Denoised: 1980
+New Errors: 97444
+Total Errors after Denoising; 389540
+
+t4.n8.alpha0.9.maxlimit30
+Original Errors: 9453553
+Undetected Errors: 275874
+Incorrectly Denoised: 2416
+New Errors: 94793
+Total Errors after Denoising; 373083
+
+t4.n8.alpha0.9.maxlimit50
+Original Errors: 9453553
+Undetected Errors: 267488
+Incorrectly Denoised: 3072
+New Errors: 80014
+Total Errors after Denoising; 350574
+
+t4.n8.alpha0.9.maxlimit70
+Original Errors: 9453553
+Undetected Errors: 264242
+Incorrectly Denoised: 3414
+New Errors: 68030
+Total Errors after Denoising; 335686
+
+t4.n8.alpha0.85.maxlimit20
+Original Errors: 9453553
+Undetected Errors: 264722
+Incorrectly Denoised: 2325
+New Errors: 201243
+Total Errors after Denoising; 468290
+
+t4.n8.alpha0.85.maxlimit30
+Original Errors: 9453553
+Undetected Errors: 259764
+Incorrectly Denoised: 2756
+New Errors: 177877
+Total Errors after Denoising; 440397
+
+t4.n8.alpha0.85.maxlimit50
+Original Errors: 9453553
+Undetected Errors: 257894
+Incorrectly Denoised: 3317
+New Errors: 131769
+Total Errors after Denoising; 392980
+
+t4.n8.alpha0.85.maxlimit70
+Original Errors: 9453553
+Undetected Errors: 257636
+Incorrectly Denoised: 3602
+New Errors: 103998
+Total Errors after Denoising; 365236
+
+t4.n12.alpha0.95.maxlimit20
+Original Errors: 9453553
+Undetected Errors: 384234
+Incorrectly Denoised: 1729
+New Errors: 34896
+Total Errors after Denoising; 420859
+
+t4.n12.alpha0.95.maxlimit30
+Original Errors: 9453553
+Undetected Errors: 332562
+Incorrectly Denoised: 2085
+New Errors: 73559
+Total Errors after Denoising; 408206
+
+t4.n12.alpha0.95.maxlimit50
+Original Errors: 9453553
+Undetected Errors: 303007
+Incorrectly Denoised: 2848
+New Errors: 120735
+Total Errors after Denoising; 426590
+
+t4.n12.alpha0.95.maxlimit70
+Original Errors: 9453553
+Undetected Errors: 289264
+Incorrectly Denoised: 3290
+New Errors: 131280
+Total Errors after Denoising; 423834
+
+t4.n12.alpha0.9.maxlimit20
+Original Errors: 9453553
+Undetected Errors: 289921
+Incorrectly Denoised: 1981
+New Errors: 121755
+Total Errors after Denoising; 413657
+
+t4.n12.alpha0.9.maxlimit30
+Original Errors: 9453553
+Undetected Errors: 274694
+Incorrectly Denoised: 2421
+New Errors: 192416
+Total Errors after Denoising; 469531
+
+t4.n12.alpha0.9.maxlimit50
+Original Errors: 9453553
+Undetected Errors: 265127
+Incorrectly Denoised: 3092
+New Errors: 211129
+Total Errors after Denoising; 479348
+
+t4.n12.alpha0.9.maxlimit70
+Original Errors: 9453553
+Undetected Errors: 261273
+Incorrectly Denoised: 3441
+New Errors: 198750
+Total Errors after Denoising; 463464
+
+t4.n12.alpha0.85.maxlimit20
+Original Errors: 9453553
+Undetected Errors: 264566
+Incorrectly Denoised: 2325
+New Errors: 234564
+Total Errors after Denoising; 501455
+
+t4.n12.alpha0.85.maxlimit30
+Original Errors: 9453553
+Undetected Errors: 258523
+Incorrectly Denoised: 2760
+New Errors: 337104
+Total Errors after Denoising; 598387
+
+t4.n12.alpha0.85.maxlimit50
+Original Errors: 9453553
+Undetected Errors: 255523
+Incorrectly Denoised: 3334
+New Errors: 312333
+Total Errors after Denoising; 571190
+
+t4.n12.alpha0.85.maxlimit70
+Original Errors: 9453553
+Undetected Errors: 254662
+Incorrectly Denoised: 3639
+New Errors: 270646
+Total Errors after Denoising; 528947
+
+t4.n16.alpha0.95.maxlimit20
+Original Errors: 9453553
+Undetected Errors: 384223
+Incorrectly Denoised: 1729
+New Errors: 35345
+Total Errors after Denoising; 421297
+
+t4.n16.alpha0.95.maxlimit30
+Original Errors: 9453553
+Undetected Errors: 332464
+Incorrectly Denoised: 2085
+New Errors: 84869
+Total Errors after Denoising; 419418
+
+t4.n16.alpha0.95.maxlimit50
+Original Errors: 9453553
+Undetected Errors: 302240
+Incorrectly Denoised: 2851
+New Errors: 214208
+Total Errors after Denoising; 519299
+
+t4.n16.alpha0.95.maxlimit70
+Original Errors: 9453553
+Undetected Errors: 288199
+Incorrectly Denoised: 3299
+New Errors: 257410
+Total Errors after Denoising; 548908
+
+t4.n16.alpha0.9.maxlimit20
+Original Errors: 9453553
+Undetected Errors: 289916
+Incorrectly Denoised: 1981
+New Errors: 122535
+Total Errors after Denoising; 414432
+
+t4.n16.alpha0.9.maxlimit30
+Original Errors: 9453553
+Undetected Errors: 274588
+Incorrectly Denoised: 2421
+New Errors: 216659
+Total Errors after Denoising; 493668
+
+t4.n16.alpha0.9.maxlimit50
+Original Errors: 9453553
+Undetected Errors: 264299
+Incorrectly Denoised: 3095
+New Errors: 350092
+Total Errors after Denoising; 617486
+
+t4.n16.alpha0.9.maxlimit70
+Original Errors: 9453553
+Undetected Errors: 260164
+Incorrectly Denoised: 3454
+New Errors: 361222
+Total Errors after Denoising; 624840
+
+t4.n16.alpha0.85.maxlimit20
+Original Errors: 9453553
+Undetected Errors: 264564
+Incorrectly Denoised: 2325
+New Errors: 235345
+Total Errors after Denoising; 502234
+
+t4.n16.alpha0.85.maxlimit30
+Original Errors: 9453553
+Undetected Errors: 258457
+Incorrectly Denoised: 2761
+New Errors: 363750
+Total Errors after Denoising; 624968
+
+t4.n16.alpha0.85.maxlimit50
+Original Errors: 9453553
+Undetected Errors: 254718
+Incorrectly Denoised: 3338
+New Errors: 484186
+Total Errors after Denoising; 742242
+
+t4.n16.alpha0.85.maxlimit70
+Original Errors: 9453553
+Undetected Errors: 253594
+Incorrectly Denoised: 3652
+New Errors: 456384
+Total Errors after Denoising; 713630
+
+t8.n4.alpha0.95.maxlimit20
+Original Errors: 9453553
+Undetected Errors: 161997
+Incorrectly Denoised: 1685
+New Errors: 5780
+Total Errors after Denoising; 169462
+
+t8.n4.alpha0.95.maxlimit30
+Original Errors: 9453553
+Undetected Errors: 110367
+Incorrectly Denoised: 2220
+New Errors: 6182
+Total Errors after Denoising; 118769
+
+t8.n4.alpha0.95.maxlimit50
+Original Errors: 9453553
+Undetected Errors: 85355
+Incorrectly Denoised: 3686
+New Errors: 5999
+Total Errors after Denoising; 95040
+
+t8.n4.alpha0.95.maxlimit70
+Original Errors: 9453553
+Undetected Errors: 74495
+Incorrectly Denoised: 4707
+New Errors: 5440
+Total Errors after Denoising; 84642
+
+t8.n4.alpha0.9.maxlimit20
+Original Errors: 9453553
+Undetected Errors: 64523
+Incorrectly Denoised: 1934
+New Errors: 22481
+Total Errors after Denoising; 88938
+
+t8.n4.alpha0.9.maxlimit30
+Original Errors: 9453553
+Undetected Errors: 51416
+Incorrectly Denoised: 2610
+New Errors: 17741
+Total Errors after Denoising; 71767
+
+t8.n4.alpha0.9.maxlimit50
+Original Errors: 9453553
+Undetected Errors: 47058
+Incorrectly Denoised: 4048
+New Errors: 12475
+Total Errors after Denoising; 63581
+
+t8.n4.alpha0.9.maxlimit70
+Original Errors: 9453553
+Undetected Errors: 46364
+Incorrectly Denoised: 5003
+New Errors: 9844
+Total Errors after Denoising; 61211
+
+t8.n4.alpha0.85.maxlimit20
+Original Errors: 9453553
+Undetected Errors: 34393
+Incorrectly Denoised: 2442
+New Errors: 52324
+Total Errors after Denoising; 89159
+
+t8.n4.alpha0.85.maxlimit30
+Original Errors: 9453553
+Undetected Errors: 33039
+Incorrectly Denoised: 3175
+New Errors: 37967
+Total Errors after Denoising; 74181
+
+t8.n4.alpha0.85.maxlimit50
+Original Errors: 9453553
+Undetected Errors: 36162
+Incorrectly Denoised: 4589
+New Errors: 23871
+Total Errors after Denoising; 64622
+
+t8.n4.alpha0.85.maxlimit70
+Original Errors: 9453553
+Undetected Errors: 38983
+Incorrectly Denoised: 5550
+New Errors: 17370
+Total Errors after Denoising; 61903
+
+t8.n8.alpha0.95.maxlimit20
+Original Errors: 9453553
+Undetected Errors: 159517
+Incorrectly Denoised: 1696
+New Errors: 26436
+Total Errors after Denoising; 187649
+
+t8.n8.alpha0.95.maxlimit30
+Original Errors: 9453553
+Undetected Errors: 104013
+Incorrectly Denoised: 2245
+New Errors: 40631
+Total Errors after Denoising; 146889
+
+t8.n8.alpha0.95.maxlimit50
+Original Errors: 9453553
+Undetected Errors: 75331
+Incorrectly Denoised: 3771
+New Errors: 57015
+Total Errors after Denoising; 136117
+
+t8.n8.alpha0.95.maxlimit70
+Original Errors: 9453553
+Undetected Errors: 62326
+Incorrectly Denoised: 4882
+New Errors: 58803
+Total Errors after Denoising; 126011
+
+t8.n8.alpha0.9.maxlimit20
+Original Errors: 9453553
+Undetected Errors: 61231
+Incorrectly Denoised: 1945
+New Errors: 98679
+Total Errors after Denoising; 161855
+
+t8.n8.alpha0.9.maxlimit30
+Original Errors: 9453553
+Undetected Errors: 43987
+Incorrectly Denoised: 2637
+New Errors: 102999
+Total Errors after Denoising; 149623
+
+t8.n8.alpha0.9.maxlimit50
+Original Errors: 9453553
+Undetected Errors: 36007
+Incorrectly Denoised: 4143
+New Errors: 99056
+Total Errors after Denoising; 139206
+
+t8.n8.alpha0.9.maxlimit70
+Original Errors: 9453553
+Undetected Errors: 33183
+Incorrectly Denoised: 5198
+New Errors: 89767
+Total Errors after Denoising; 128148
+
+t8.n8.alpha0.85.maxlimit20
+Original Errors: 9453553
+Undetected Errors: 30495
+Incorrectly Denoised: 2453
+New Errors: 209193
+Total Errors after Denoising; 242141
+
+t8.n8.alpha0.85.maxlimit30
+Original Errors: 9453553
+Undetected Errors: 25101
+Incorrectly Denoised: 3206
+New Errors: 198603
+Total Errors after Denoising; 226910
+
+t8.n8.alpha0.85.maxlimit50
+Original Errors: 9453553
+Undetected Errors: 24540
+Incorrectly Denoised: 4694
+New Errors: 163749
+Total Errors after Denoising; 192983
+
+t8.n8.alpha0.85.maxlimit70
+Original Errors: 9453553
+Undetected Errors: 25200
+Incorrectly Denoised: 5748
+New Errors: 137049
+Total Errors after Denoising; 167997
+
+t8.n12.alpha0.95.maxlimit20
+Original Errors: 9453553
+Undetected Errors: 159323
+Incorrectly Denoised: 1696
+New Errors: 35955
+Total Errors after Denoising; 196974
+
+t8.n12.alpha0.95.maxlimit30
+Original Errors: 9453553
+Undetected Errors: 102958
+Incorrectly Denoised: 2248
+New Errors: 83595
+Total Errors after Denoising; 188801
+
+t8.n12.alpha0.95.maxlimit50
+Original Errors: 9453553
+Undetected Errors: 72383
+Incorrectly Denoised: 3790
+New Errors: 179437
+Total Errors after Denoising; 255610
+
+t8.n12.alpha0.95.maxlimit70
+Original Errors: 9453553
+Undetected Errors: 58521
+Incorrectly Denoised: 4923
+New Errors: 209054
+Total Errors after Denoising; 272498
+
+t8.n12.alpha0.9.maxlimit20
+Original Errors: 9453553
+Undetected Errors: 61031
+Incorrectly Denoised: 1946
+New Errors: 123150
+Total Errors after Denoising; 186127
+
+t8.n12.alpha0.9.maxlimit30
+Original Errors: 9453553
+Undetected Errors: 42713
+Incorrectly Denoised: 2642
+New Errors: 204642
+Total Errors after Denoising; 249997
+
+t8.n12.alpha0.9.maxlimit50
+Original Errors: 9453553
+Undetected Errors: 32703
+Incorrectly Denoised: 4169
+New Errors: 276989
+Total Errors after Denoising; 313861
+
+t8.n12.alpha0.9.maxlimit70
+Original Errors: 9453553
+Undetected Errors: 29036
+Incorrectly Denoised: 5243
+New Errors: 284212
+Total Errors after Denoising; 318491
+
+t8.n12.alpha0.85.maxlimit20
+Original Errors: 9453553
+Undetected Errors: 30338
+Incorrectly Denoised: 2453
+New Errors: 242858
+Total Errors after Denoising; 275649
+
+t8.n12.alpha0.85.maxlimit30
+Original Errors: 9453553
+Undetected Errors: 23775
+Incorrectly Denoised: 3210
+New Errors: 371166
+Total Errors after Denoising; 398151
+
+t8.n12.alpha0.85.maxlimit50
+Original Errors: 9453553
+Undetected Errors: 21201
+Incorrectly Denoised: 4724
+New Errors: 414644
+Total Errors after Denoising; 440569
+
+t8.n12.alpha0.85.maxlimit70
+Original Errors: 9453553
+Undetected Errors: 21029
+Incorrectly Denoised: 5801
+New Errors: 389775
+Total Errors after Denoising; 416605
+
+t8.n16.alpha0.95.maxlimit20
+Original Errors: 9453553
+Undetected Errors: 159312
+Incorrectly Denoised: 1696
+New Errors: 36506
+Total Errors after Denoising; 197514
+
+t8.n16.alpha0.95.maxlimit30
+Original Errors: 9453553
+Undetected Errors: 102860
+Incorrectly Denoised: 2248
+New Errors: 95780
+Total Errors after Denoising; 200888
+
+t8.n16.alpha0.95.maxlimit50
+Original Errors: 9453553
+Undetected Errors: 71453
+Incorrectly Denoised: 3793
+New Errors: 306738
+Total Errors after Denoising; 381984
+
+t8.n16.alpha0.95.maxlimit70
+Original Errors: 9453553
+Undetected Errors: 57066
+Incorrectly Denoised: 4934
+New Errors: 423404
+Total Errors after Denoising; 485404
+
+t8.n16.alpha0.9.maxlimit20
+Original Errors: 9453553
+Undetected Errors: 61026
+Incorrectly Denoised: 1946
+New Errors: 124037
+Total Errors after Denoising; 187009
+
+t8.n16.alpha0.9.maxlimit30
+Original Errors: 9453553
+Undetected Errors: 42606
+Incorrectly Denoised: 2642
+New Errors: 229731
+Total Errors after Denoising; 274979
+
+t8.n16.alpha0.9.maxlimit50
+Original Errors: 9453553
+Undetected Errors: 31713
+Incorrectly Denoised: 4172
+New Errors: 455973
+Total Errors after Denoising; 491858
+
+t8.n16.alpha0.9.maxlimit70
+Original Errors: 9453553
+Undetected Errors: 27495
+Incorrectly Denoised: 5258
+New Errors: 544122
+Total Errors after Denoising; 576875
+
+t8.n16.alpha0.85.maxlimit20
+Original Errors: 9453553
+Undetected Errors: 30336
+Incorrectly Denoised: 2453
+New Errors: 243754
+Total Errors after Denoising; 276543
+
+t8.n16.alpha0.85.maxlimit30
+Original Errors: 9453553
+Undetected Errors: 23712
+Incorrectly Denoised: 3211
+New Errors: 398758
+Total Errors after Denoising; 425681
+
+t8.n16.alpha0.85.maxlimit50
+Original Errors: 9453553
+Undetected Errors: 20236
+Incorrectly Denoised: 4727
+New Errors: 646797
+Total Errors after Denoising; 671760
+
+t8.n16.alpha0.85.maxlimit70
+Original Errors: 9453553
+Undetected Errors: 19539
+Incorrectly Denoised: 5818
+New Errors: 696858
+Total Errors after Denoising; 722215
+
+t12.n4.alpha0.95.maxlimit20
+Original Errors: 9453553
+Undetected Errors: 159120
+Incorrectly Denoised: 1715
+New Errors: 6156
+Total Errors after Denoising; 166991
+
+t12.n4.alpha0.95.maxlimit30
+Original Errors: 9453553
+Undetected Errors: 108223
+Incorrectly Denoised: 2337
+New Errors: 7018
+Total Errors after Denoising; 117578
+
+t12.n4.alpha0.95.maxlimit50
+Original Errors: 9453553
+Undetected Errors: 85671
+Incorrectly Denoised: 4265
+New Errors: 7174
+Total Errors after Denoising; 97110
+
+t12.n4.alpha0.95.maxlimit70
+Original Errors: 9453553
+Undetected Errors: 76341
+Incorrectly Denoised: 5789
+New Errors: 6724
+Total Errors after Denoising; 88854
+
+t12.n4.alpha0.9.maxlimit20
+Original Errors: 9453553
+Undetected Errors: 61639
+Incorrectly Denoised: 1964
+New Errors: 22878
+Total Errors after Denoising; 86481
+
+t12.n4.alpha0.9.maxlimit30
+Original Errors: 9453553
+Undetected Errors: 49306
+Incorrectly Denoised: 2730
+New Errors: 18581
+Total Errors after Denoising; 70617
+
+t12.n4.alpha0.9.maxlimit50
+Original Errors: 9453553
+Undetected Errors: 47466
+Incorrectly Denoised: 4655
+New Errors: 13686
+Total Errors after Denoising; 65807
+
+t12.n4.alpha0.9.maxlimit70
+Original Errors: 9453553
+Undetected Errors: 48344
+Incorrectly Denoised: 6131
+New Errors: 11133
+Total Errors after Denoising; 65608
+
+t12.n4.alpha0.85.maxlimit20
+Original Errors: 9453553
+Undetected Errors: 31468
+Incorrectly Denoised: 2477
+New Errors: 52757
+Total Errors after Denoising; 86702
+
+t12.n4.alpha0.85.maxlimit30
+Original Errors: 9453553
+Undetected Errors: 30858
+Incorrectly Denoised: 3303
+New Errors: 38887
+Total Errors after Denoising; 73048
+
+t12.n4.alpha0.85.maxlimit50
+Original Errors: 9453553
+Undetected Errors: 36648
+Incorrectly Denoised: 5238
+New Errors: 25173
+Total Errors after Denoising; 67059
+
+t12.n4.alpha0.85.maxlimit70
+Original Errors: 9453553
+Undetected Errors: 41080
+Incorrectly Denoised: 6753
+New Errors: 18739
+Total Errors after Denoising; 66572
+
+t12.n8.alpha0.95.maxlimit20
+Original Errors: 9453553
+Undetected Errors: 156612
+Incorrectly Denoised: 1726
+New Errors: 26965
+Total Errors after Denoising; 185303
+
+t12.n8.alpha0.95.maxlimit30
+Original Errors: 9453553
+Undetected Errors: 101162
+Incorrectly Denoised: 2362
+New Errors: 43806
+Total Errors after Denoising; 147330
+
+t12.n8.alpha0.95.maxlimit50
+Original Errors: 9453553
+Undetected Errors: 73321
+Incorrectly Denoised: 4359
+New Errors: 68904
+Total Errors after Denoising; 146584
+
+t12.n8.alpha0.95.maxlimit70
+Original Errors: 9453553
+Undetected Errors: 61159
+Incorrectly Denoised: 6011
+New Errors: 73512
+Total Errors after Denoising; 140682
+
+t12.n8.alpha0.9.maxlimit20
+Original Errors: 9453553
+Undetected Errors: 58313
+Incorrectly Denoised: 1975
+New Errors: 99242
+Total Errors after Denoising; 159530
+
+t12.n8.alpha0.9.maxlimit30
+Original Errors: 9453553
+Undetected Errors: 41128
+Incorrectly Denoised: 2757
+New Errors: 106315
+Total Errors after Denoising; 150200
+
+t12.n8.alpha0.9.maxlimit50
+Original Errors: 9453553
+Undetected Errors: 34050
+Incorrectly Denoised: 4754
+New Errors: 111357
+Total Errors after Denoising; 150161
+
+t12.n8.alpha0.9.maxlimit70
+Original Errors: 9453553
+Undetected Errors: 32053
+Incorrectly Denoised: 6379
+New Errors: 104941
+Total Errors after Denoising; 143373
+
+t12.n8.alpha0.85.maxlimit20
+Original Errors: 9453553
+Undetected Errors: 27536
+Incorrectly Denoised: 2488
+New Errors: 209803
+Total Errors after Denoising; 239827
+
+t12.n8.alpha0.85.maxlimit30
+Original Errors: 9453553
+Undetected Errors: 22222
+Incorrectly Denoised: 3335
+New Errors: 202207
+Total Errors after Denoising; 227764
+
+t12.n8.alpha0.85.maxlimit50
+Original Errors: 9453553
+Undetected Errors: 22564
+Incorrectly Denoised: 5345
+New Errors: 177016
+Total Errors after Denoising; 204925
+
+t12.n8.alpha0.85.maxlimit70
+Original Errors: 9453553
+Undetected Errors: 24103
+Incorrectly Denoised: 7000
+New Errors: 153395
+Total Errors after Denoising; 184498
+
+t12.n12.alpha0.95.maxlimit20
+Original Errors: 9453553
+Undetected Errors: 156418
+Incorrectly Denoised: 1726
+New Errors: 36550
+Total Errors after Denoising; 194694
+
+t12.n12.alpha0.95.maxlimit30
+Original Errors: 9453553
+Undetected Errors: 100099
+Incorrectly Denoised: 2365
+New Errors: 87496
+Total Errors after Denoising; 189960
+
+t12.n12.alpha0.95.maxlimit50
+Original Errors: 9453553
+Undetected Errors: 69945
+Incorrectly Denoised: 4378
+New Errors: 209911
+Total Errors after Denoising; 284234
+
+t12.n12.alpha0.95.maxlimit70
+Original Errors: 9453553
+Undetected Errors: 56674
+Incorrectly Denoised: 6059
+New Errors: 264554
+Total Errors after Denoising; 327287
+
+t12.n12.alpha0.9.maxlimit20
+Original Errors: 9453553
+Undetected Errors: 58112
+Incorrectly Denoised: 1976
+New Errors: 123789
+Total Errors after Denoising; 183877
+
+t12.n12.alpha0.9.maxlimit30
+Original Errors: 9453553
+Undetected Errors: 39843
+Incorrectly Denoised: 2762
+New Errors: 208773
+Total Errors after Denoising; 251378
+
+t12.n12.alpha0.9.maxlimit50
+Original Errors: 9453553
+Undetected Errors: 30275
+Incorrectly Denoised: 4781
+New Errors: 309166
+Total Errors after Denoising; 344222
+
+t12.n12.alpha0.9.maxlimit70
+Original Errors: 9453553
+Undetected Errors: 27213
+Incorrectly Denoised: 6432
+New Errors: 341853
+Total Errors after Denoising; 375498
+
+t12.n12.alpha0.85.maxlimit20
+Original Errors: 9453553
+Undetected Errors: 27378
+Incorrectly Denoised: 2488
+New Errors: 243621
+Total Errors after Denoising; 273487
+
+t12.n12.alpha0.85.maxlimit30
+Original Errors: 9453553
+Undetected Errors: 20883
+Incorrectly Denoised: 3339
+New Errors: 375611
+Total Errors after Denoising; 399833
+
+t12.n12.alpha0.85.maxlimit50
+Original Errors: 9453553
+Undetected Errors: 18752
+Incorrectly Denoised: 5371
+New Errors: 449265
+Total Errors after Denoising; 473388
+
+t12.n12.alpha0.85.maxlimit70
+Original Errors: 9453553
+Undetected Errors: 19216
+Incorrectly Denoised: 7062
+New Errors: 451797
+Total Errors after Denoising; 478075
+
+t12.n16.alpha0.95.maxlimit20
+Original Errors: 9453553
+Undetected Errors: 156407
+Incorrectly Denoised: 1726
+New Errors: 37115
+Total Errors after Denoising; 195248
+
+t12.n16.alpha0.95.maxlimit30
+Original Errors: 9453553
+Undetected Errors: 100001
+Incorrectly Denoised: 2365
+New Errors: 99909
+Total Errors after Denoising; 202275
+
+t12.n16.alpha0.95.maxlimit50
+Original Errors: 9453553
+Undetected Errors: 68988
+Incorrectly Denoised: 4381
+New Errors: 343928
+Total Errors after Denoising; 417297
+
+t12.n16.alpha0.95.maxlimit70
+Original Errors: 9453553
+Undetected Errors: 55039
+Incorrectly Denoised: 6071
+New Errors: 526487
+Total Errors after Denoising; 587597
+
+t12.n16.alpha0.9.maxlimit20
+Original Errors: 9453553
+Undetected Errors: 58107
+Incorrectly Denoised: 1976
+New Errors: 124690
+Total Errors after Denoising; 184773
+
+t12.n16.alpha0.9.maxlimit30
+Original Errors: 9453553
+Undetected Errors: 39736
+Incorrectly Denoised: 2762
+New Errors: 234087
+Total Errors after Denoising; 276585
+
+t12.n16.alpha0.9.maxlimit50
+Original Errors: 9453553
+Undetected Errors: 29250
+Incorrectly Denoised: 4784
+New Errors: 495907
+Total Errors after Denoising; 529941
+
+t12.n16.alpha0.9.maxlimit70
+Original Errors: 9453553
+Undetected Errors: 25485
+Incorrectly Denoised: 6448
+New Errors: 652371
+Total Errors after Denoising; 684304
+
+t12.n16.alpha0.85.maxlimit20
+Original Errors: 9453553
+Undetected Errors: 27376
+Incorrectly Denoised: 2488
+New Errors: 244511
+Total Errors after Denoising; 274375
+
+t12.n16.alpha0.85.maxlimit30
+Original Errors: 9453553
+Undetected Errors: 20820
+Incorrectly Denoised: 3340
+New Errors: 403390
+Total Errors after Denoising; 427550
+
+t12.n16.alpha0.85.maxlimit50
+Original Errors: 9453553
+Undetected Errors: 17740
+Incorrectly Denoised: 5374
+New Errors: 689208
+Total Errors after Denoising; 712322
+
+t12.n16.alpha0.85.maxlimit70
+Original Errors: 9453553
+Undetected Errors: 17508
+Incorrectly Denoised: 7077
+New Errors: 813503
+Total Errors after Denoising; 838088
+
+t8.n2.alpha0.9.maxlimit50
+Original Errors: 9453553
+Undetected Errors: 72343
+Incorrectly Denoised: 3851
+New Errors: 1871
+Total Errors after Denoising; 78065
+
+t8.n2.alpha0.9.maxlimit100
+Original Errors: 9453553
+Undetected Errors: 80076
+Incorrectly Denoised: 5210
+New Errors: 974
+Total Errors after Denoising; 86260
+
+t8.n2.alpha0.9.maxlimit200
+Original Errors: 9453553
+Undetected Errors: 94042
+Incorrectly Denoised: 5779
+New Errors: 505
+Total Errors after Denoising; 100326
+
+t8.n2.alpha0.85.maxlimit50
+Original Errors: 9453553
+Undetected Errors: 62589
+Incorrectly Denoised: 4362
+New Errors: 3741
+Total Errors after Denoising; 70692
+
+t8.n2.alpha0.85.maxlimit100
+Original Errors: 9453553
+Undetected Errors: 76926
+Incorrectly Denoised: 5633
+New Errors: 1671
+Total Errors after Denoising; 84230
+
+t8.n2.alpha0.85.maxlimit200
+Original Errors: 9453553
+Undetected Errors: 93759
+Incorrectly Denoised: 6046
+New Errors: 713
+Total Errors after Denoising; 100518
+
+t8.n3.alpha0.9.maxlimit50
+Original Errors: 9453553
+Undetected Errors: 54040
+Incorrectly Denoised: 3986
+New Errors: 5355
+Total Errors after Denoising; 63381
+
+t8.n3.alpha0.9.maxlimit100
+Original Errors: 9453553
+Undetected Errors: 56152
+Incorrectly Denoised: 5478
+New Errors: 3004
+Total Errors after Denoising; 64634
+
+t8.n3.alpha0.9.maxlimit200
+Original Errors: 9453553
+Undetected Errors: 63457
+Incorrectly Denoised: 6188
+New Errors: 1823
+Total Errors after Denoising; 71468
+
+t8.n3.alpha0.85.maxlimit50
+Original Errors: 9453553
+Undetected Errors: 43659
+Incorrectly Denoised: 4522
+New Errors: 10505
+Total Errors after Denoising; 58686
+
+t8.n3.alpha0.85.maxlimit100
+Original Errors: 9453553
+Undetected Errors: 52500
+Incorrectly Denoised: 5939
+New Errors: 5035
+Total Errors after Denoising; 63474
+
+t8.n3.alpha0.85.maxlimit200
+Original Errors: 9453553
+Undetected Errors: 63005
+Incorrectly Denoised: 6462
+New Errors: 2504
+Total Errors after Denoising; 71971
+
+t8.n4.alpha0.9.maxlimit50
+Original Errors: 9453553
+Undetected Errors: 47058
+Incorrectly Denoised: 4048
+New Errors: 12475
+Total Errors after Denoising; 63581
+
+t8.n4.alpha0.9.maxlimit100
+Original Errors: 9453553
+Undetected Errors: 47101
+Incorrectly Denoised: 5617
+New Errors: 7668
+Total Errors after Denoising; 60386
+
+t8.n4.alpha0.9.maxlimit200
+Original Errors: 9453553
+Undetected Errors: 52428
+Incorrectly Denoised: 6392
+New Errors: 5025
+Total Errors after Denoising; 63845
+
+t8.n4.alpha0.85.maxlimit50
+Original Errors: 9453553
+Undetected Errors: 36162
+Incorrectly Denoised: 4589
+New Errors: 23871
+Total Errors after Denoising; 64622
+
+t8.n4.alpha0.85.maxlimit100
+Original Errors: 9453553
+Undetected Errors: 42821
+Incorrectly Denoised: 6092
+New Errors: 12442
+Total Errors after Denoising; 61355
+
+t8.n4.alpha0.85.maxlimit200
+Original Errors: 9453553
+Undetected Errors: 51573
+Incorrectly Denoised: 6678
+New Errors: 6744
+Total Errors after Denoising; 64995
+
+t8.n5.alpha0.9.maxlimit50
+Original Errors: 9453553
+Undetected Errors: 42715
+Incorrectly Denoised: 4085
+New Errors: 25190
+Total Errors after Denoising; 71990
+
+t8.n5.alpha0.9.maxlimit100
+Original Errors: 9453553
+Undetected Errors: 41189
+Incorrectly Denoised: 5739
+New Errors: 16683
+Total Errors after Denoising; 63611
+
+t8.n5.alpha0.9.maxlimit200
+Original Errors: 9453553
+Undetected Errors: 45325
+Incorrectly Denoised: 6542
+New Errors: 11694
+Total Errors after Denoising; 63561
+
+t8.n5.alpha0.85.maxlimit50
+Original Errors: 9453553
+Undetected Errors: 31597
+Incorrectly Denoised: 4633
+New Errors: 46335
+Total Errors after Denoising; 82565
+
+t8.n5.alpha0.85.maxlimit100
+Original Errors: 9453553
+Undetected Errors: 36582
+Incorrectly Denoised: 6223
+New Errors: 26116
+Total Errors after Denoising; 68921
+
+t8.n5.alpha0.85.maxlimit200
+Original Errors: 9453553
+Undetected Errors: 44060
+Incorrectly Denoised: 6844
+New Errors: 15342
+Total Errors after Denoising; 66246
+
+t8.n2.alpha0.9.maxlimit50
+Original Errors: 9453553
+Undetected Errors: 72343
+Incorrectly Denoised: 3851
+New Errors: 1871
+Total Errors after Denoising; 78065
+
+t8.n4.alpha0.9.maxlimit100.4dict
+Original Errors: 9453553
+Undetected Errors: 46336
+Incorrectly Denoised: 6145
+New Errors: 6336
+Total Errors after Denoising; 58817
+
+t8.n4.alpha0.9.maxlimit100.4dictlen15
+Original Errors: 9453553
+Undetected Errors: 50761
+Incorrectly Denoised: 6767
+New Errors: 6413
+Total Errors after Denoising; 63941
+
+t8.n4.alpha0.9.maxlimit100.maxshift20
+Original Errors: 9453553
+Undetected Errors: 111420
+Incorrectly Denoised: 6016
+New Errors: 109668
+Total Errors after Denoising; 227104
+
+t8.n4.alpha0.9.maxlimit100.maxshift50
+Original Errors: 9453553
+Undetected Errors: 47101
+Incorrectly Denoised: 5617
+New Errors: 7668
+Total Errors after Denoising; 60386
+
+t8.n4.alpha0.9.maxlimit100.left_right_interleaved
+Original Errors: 9453553
+Undetected Errors: 46655
+Incorrectly Denoised: 5695
+New Errors: 9283
+Total Errors after Denoising; 61633
+
+t8.n5.alpha0.9.maxlimit100.left_right_interleaved
+Original Errors: 9453553
+Undetected Errors: 40709
+Incorrectly Denoised: 5817
+New Errors: 19233
+Total Errors after Denoising; 65759
+
+t8.n4.alpha0.9.maxlimit100.left_right_interleaved
+Original Errors: 9453553
+Undetected Errors: 40709
+Incorrectly Denoised: 5817
+New Errors: 19233
+Total Errors after Denoising; 65759
+
+t8.n4.alpha0.9.maxlimit100.left_right_interleaved
+Original Errors: 9453553
+Undetected Errors: 47083
+Incorrectly Denoised: 5620
+New Errors: 7667
+Total Errors after Denoising; 60370
+
+t8.n4.alpha0.9.maxlimit100.maxsearch20
+Original Errors: 9453553
+Undetected Errors: 45560
+Incorrectly Denoised: 5689
+New Errors: 10543
+Total Errors after Denoising; 61792
+
+t8.n4.alpha0.9.maxlimit100.maxsearch10
+Original Errors: 9453553
+Undetected Errors: 44356
+Incorrectly Denoised: 5679
+New Errors: 13310
+Total Errors after Denoising; 63345
+
+t8.n3.alpha0.9.maxlimit100.maxsearch10
+Original Errors: 9453553
+Undetected Errors: 53370
+Incorrectly Denoised: 5547
+New Errors: 6111
+Total Errors after Denoising; 65028
+
+t16.n4.alpha0.9.maxlimit1000.maxsearch20
+Original Errors: 9453553
+Undetected Errors: 103015
+Incorrectly Denoised: 11911
+New Errors: 8996
+Total Errors after Denoising; 123922
+
+t8.n4.alpha0.9.maxlimit1000.maxsearch20
+Original Errors: 9453553
+Undetected Errors: 67904
+Incorrectly Denoised: 7004
+New Errors: 5299
+Total Errors after Denoising; 80207
+
+t8.n5.alpha0.75.maxlimit1000
+Original Errors: 9453553
+Undetected Errors: 7739650
+Incorrectly Denoised: 4880
+New Errors: 340023
+Total Errors after Denoising; 8084553
+
+t8.n5.alpha0.75.maxlimit1000
+Original Errors: 18949091
+Undetected Errors: 12766898
+Incorrectly Denoised: 10497
+New Errors: 597724
+Total Errors after Denoising; 13375119
+
+t8.n5.alpha0.75.maxlimit1000
+Original Errors: 9453553
+Undetected Errors: 2061925
+Incorrectly Denoised: 3143
+New Errors: 197167
+Total Errors after Denoising; 2262235
+
+t8.n5.alpha0.75.maxlimit1000
+Original Errors: 18949091
+Undetected Errors: 533213
+Incorrectly Denoised: 3753
+New Errors: 33358
+Total Errors after Denoising; 570324
+
+t8.n5.alpha0.75.maxlimit1000
+Original Errors: 9453553
+Undetected Errors: 2061895
+Incorrectly Denoised: 3102
+New Errors: 197137
+Total Errors after Denoising; 2262134
+
+t8.n4.alpha0.9.maxlimit100
+Original Errors: 9453553
+Undetected Errors: 45560
+Incorrectly Denoised: 5689
+New Errors: 10543
+Total Errors after Denoising; 61792
+
+t8.n4.alpha0.9.maxlimit100
+Original Errors: 9453553
+Undetected Errors: 45560
+Incorrectly Denoised: 5689
+New Errors: 10543
+Total Errors after Denoising; 61792
+
+t8.n4.alpha0.9.maxlimit100
+Original Errors: 9453553
+Undetected Errors: 45560
+Incorrectly Denoised: 5689
+New Errors: 10543
+Total Errors after Denoising; 61792
+
+t8.n4.alpha0.9.maxlimit100
+Original Errors: 9453553
+Undetected Errors: 210324
+Incorrectly Denoised: 2794
+New Errors: 11896
+Total Errors after Denoising; 225014
+
+t8.n4.alpha0.9.maxlimit100
+Original Errors: 9453553
+Undetected Errors: 43786
+Incorrectly Denoised: 5021
+New Errors: 11782
+Total Errors after Denoising; 60589

@@ -1,0 +1,416 @@
+
+t8.maxshift20.maxsearch20.param40
+Original Errors: 9453553
+Undetected Errors: 9453553
+Incorrectly Denoised: 0
+New Errors: 0
+Total Errors after Denoising; 9453553
+
+t8.maxshift20.maxsearch20.param40
+Original Errors: 9453553
+Undetected Errors: 1392297
+Incorrectly Denoised: 6177
+New Errors: 1640604
+Total Errors after Denoising; 3039078
+
+t8.maxshift20.maxsearch20.param40.1
+Original Errors: 9453553
+Undetected Errors: 8761052
+Incorrectly Denoised: 1917
+New Errors: 542356
+Total Errors after Denoising; 9305325
+
+t8.maxshift50.maxsearch20.param4:1.param5:-1
+Original Errors: 9453553
+Undetected Errors: 9453553
+Incorrectly Denoised: 0
+New Errors: 0
+Total Errors after Denoising; 9453553
+
+t8.maxshift50.maxsearch20.param4:1.param5:-2
+Original Errors: 9453553
+Undetected Errors: 7734679
+Incorrectly Denoised: 2590
+New Errors: 175795
+Total Errors after Denoising; 7913064
+
+t8.maxshift50.maxsearch20.param4:1.param5:-1
+Original Errors: 9453553
+Undetected Errors: 1129849
+Incorrectly Denoised: 6344
+New Errors: 418178
+Total Errors after Denoising; 1554371
+
+t8.maxshift50.maxsearch20.param4:1.param5:-1
+Original Errors: 9453553
+Undetected Errors: 1111020
+Incorrectly Denoised: 6493
+New Errors: 1406526
+Total Errors after Denoising; 2524039
+
+t8.maxshift50.maxsearch1000.param4:0.75.param5:-1
+Original Errors: 9453553
+Undetected Errors: 310355
+Incorrectly Denoised: 1125
+New Errors: 1281
+Total Errors after Denoising; 312761
+
+t8.maxshift50.maxsearch1000.param4:0.5.param5:-1
+Original Errors: 9453553
+Undetected Errors: 9453553
+Incorrectly Denoised: 0
+New Errors: 0
+Total Errors after Denoising; 9453553
+
+t8.maxshift50.maxsearch1000.param4:0.6.param5:-1
+Original Errors: 9453553
+Undetected Errors: 9453553
+Incorrectly Denoised: 0
+New Errors: 0
+Total Errors after Denoising; 9453553
+
+t8.maxshift50.maxsearch1000.param4:0.7.param5:-1
+Original Errors: 9453553
+Undetected Errors: 238830
+Incorrectly Denoised: 1177
+New Errors: 1352
+Total Errors after Denoising; 241359
+
+t8.maxshift50.maxsearch1000.param4:0.8.param5:-1
+Original Errors: 9453553
+Undetected Errors: 527602
+Incorrectly Denoised: 1288
+New Errors: 2926
+Total Errors after Denoising; 531816
+
+t8.maxshift50.maxsearch1000.param4:0.7.param5:2
+Original Errors: 9453553
+Undetected Errors: 84518
+Incorrectly Denoised: 1308
+New Errors: 3235
+Total Errors after Denoising; 89061
+
+t8.maxshift50.maxsearch1000.param4:0.6.param5:2
+Original Errors: 9453553
+Undetected Errors: 40668
+Incorrectly Denoised: 1420
+New Errors: 3564
+Total Errors after Denoising; 45652
+
+t8.maxshift50.maxsearch1000.param4:0.6.param5:3
+Original Errors: 9453553
+Undetected Errors: 35193
+Incorrectly Denoised: 1445
+New Errors: 6476
+Total Errors after Denoising; 43114
+
+t8.maxshift50.maxsearch1000.param4:0.6.param5:4
+Original Errors: 9453553
+Undetected Errors: 64675
+Incorrectly Denoised: 1494
+New Errors: 11197
+Total Errors after Denoising; 77366
+
+t8.maxshift50.maxsearch1000.param4:0.7.param5:2
+Original Errors: 9453553
+Undetected Errors: 84518
+Incorrectly Denoised: 1308
+New Errors: 3235
+Total Errors after Denoising; 89061
+
+t8.maxshift50.maxsearch1000.param4:0.7.param5:3
+Original Errors: 9453553
+Undetected Errors: 79118
+Incorrectly Denoised: 1331
+New Errors: 5991
+Total Errors after Denoising; 86440
+
+t8.maxshift50.maxsearch1000.param4:0.7.param5:4
+Original Errors: 9453553
+Undetected Errors: 77750
+Incorrectly Denoised: 1340
+New Errors: 10213
+Total Errors after Denoising; 89303
+
+t8.maxshift50.maxsearch1000.param4:0.5.param5:2
+Original Errors: 9453553
+Undetected Errors: 37659
+Incorrectly Denoised: 1545
+New Errors: 4186
+Total Errors after Denoising; 43390
+
+t8.maxshift50.maxsearch1000.param4:0.5.param5:3
+Original Errors: 9453553
+Undetected Errors: 34544
+Incorrectly Denoised: 1544
+New Errors: 7224
+Total Errors after Denoising; 43312
+
+t8.maxshift50.maxsearch1000.param4:0.5.param5:4
+Original Errors: 9453553
+Undetected Errors: 64083
+Incorrectly Denoised: 1599
+New Errors: 12408
+Total Errors after Denoising; 78090
+
+t8.maxshift50.maxsearch20.param4:0.5.param5:2
+Original Errors: 9453553
+Undetected Errors: 37257
+Incorrectly Denoised: 1569
+New Errors: 4935
+Total Errors after Denoising; 43761
+
+t16.maxshift50.maxsearch20.param4:0.5.param5:2
+Original Errors: 9453553
+Undetected Errors: 33927
+Incorrectly Denoised: 1586
+New Errors: 6996
+Total Errors after Denoising; 42509
+
+t8.maxshift50.maxsearch20.param4:0.5.param5:2.matchlen/readlen,2dict,dictlen15
+Original Errors: 9453553
+Undetected Errors: 34682
+Incorrectly Denoised: 1562
+New Errors: 4857
+Total Errors after Denoising; 41101
+
+t16.maxshift50.maxsearch20.param4:0.5.param5:2.matchlen/readlen,2dict,dictlen15
+Original Errors: 9453553
+Undetected Errors: 31414
+Incorrectly Denoised: 1578
+New Errors: 6869
+Total Errors after Denoising; 39861
+
+t8.maxshift50.maxsearch20.param4:0.5.param5:2.matchlen/readlen
+Original Errors: 9453553
+Undetected Errors: 39494
+Incorrectly Denoised: 1546
+New Errors: 4269
+Total Errors after Denoising; 45309
+
+t16.maxshift50.maxsearch20.param4:0.6.param5:3_4dict15
+Original Errors: 9453553
+Undetected Errors: 12829
+Incorrectly Denoised: 1519
+New Errors: 13617
+Total Errors after Denoising; 27965
+
+t16.maxshift50.maxsearch20.param4:0.6.param5:3_4dict15_intraread
+Original Errors: 9453553
+Undetected Errors: 13247
+Incorrectly Denoised: 1487
+New Errors: 5945
+Total Errors after Denoising; 20679
+
+
+t16.maxshift50.maxsearch20.param4:0.6.param5:3_4dict15_intraread_mark_bases_and_denoise_when_hamming_increases
+Original Errors: 9453553
+Undetected Errors: 251411
+Incorrectly Denoised: 2347
+New Errors: 18063
+Total Errors after Denoising; 271821
+
+t8.maxshift50.maxsearch20.param4:0.5.param5:2_4dict15_intraread
+Original Errors: 9453553
+Undetected Errors: 32933
+Incorrectly Denoised: 1567
+New Errors: 3320
+Total Errors after Denoising; 37820
+
+t8.maxshift50.maxsearch20.param4:0.5.param5:3_4dict15_intraread
+Original Errors: 9453553
+Undetected Errors: 16862
+Incorrectly Denoised: 1559
+New Errors: 5439
+Total Errors after Denoising; 23860
+
+t8.maxshift50.maxsearch20.param4:0.6.param5:2_4dict15_intraread
+Original Errors: 9453553
+Undetected Errors: 22356
+Incorrectly Denoised: 1436
+New Errors: 2757
+Total Errors after Denoising; 26549
+
+t8.maxshift50.maxsearch20.param4:0.6.param5:3_4dict15_intraread
+Original Errors: 9453553
+Undetected Errors: 16513
+Incorrectly Denoised: 1465
+New Errors: 4799
+Total Errors after Denoising; 22777
+
+t16.maxshift50.maxsearch20.param4:0.5.param5:2_4dict15_intraread
+Original Errors: 9453553
+Undetected Errors: 30496
+Incorrectly Denoised: 1575
+New Errors: 3743
+Total Errors after Denoising; 35814
+
+t16.maxshift50.maxsearch20.param4:0.5.param5:3_4dict15_intraread
+Original Errors: 9453553
+Undetected Errors: 13661
+Incorrectly Denoised: 1569
+New Errors: 6879
+Total Errors after Denoising; 22109
+
+t16.maxshift50.maxsearch20.param4:0.6.param5:2_4dict15_intraread
+Original Errors: 9453553
+Undetected Errors: 19089
+Incorrectly Denoised: 1458
+New Errors: 3103
+Total Errors after Denoising; 23650
+
+t16.maxshift50.maxsearch20.param4:0.6.param5:3_4dict15_intraread
+Original Errors: 9453553
+Undetected Errors: 13247
+Incorrectly Denoised: 1487
+New Errors: 5945
+Total Errors after Denoising; 20679
+
+t16.maxshift50.maxsearch20.param4:0.6.param5:3_4dict15_intraread_mark_bases_and_denoise_when_hamming_increases
+Original Errors: 9453553
+Undetected Errors: 13227
+Incorrectly Denoised: 2361
+New Errors: 18292
+Total Errors after Denoising; 33880
+
+t16.maxshift50.maxsearch20.param4:0.6.param5:3_4dict15_intraread_denoise_if_very low coverage and n-1 match
+Original Errors: 9453553
+Undetected Errors: 12147
+Incorrectly Denoised: 1487
+New Errors: 5966
+Total Errors after Denoising; 19600
+
+t16.maxshift50.maxsearch20.param4:0.5.param5:4_4dict15_intraread
+Original Errors: 9453553
+Undetected Errors: 15491
+Incorrectly Denoised: 1636
+New Errors: 13682
+Total Errors after Denoising; 30809
+
+t16.maxshift50.maxsearch20.param4:0.6.param5:4_4dict15_intraread
+Original Errors: 9453553
+Undetected Errors: 14966
+Incorrectly Denoised: 1555
+New Errors: 12019
+Total Errors after Denoising; 28540
+
+t16.maxshift50.maxsearch20.param4:0.7.param5:2_4dict15_intraread
+Original Errors: 9453553
+Undetected Errors: 26007
+Incorrectly Denoised: 1439
+New Errors: 2905
+Total Errors after Denoising; 30351
+
+t16.maxshift50.maxsearch20.param4:0.7.param5:3_4dict15_intraread
+Original Errors: 9453553
+Undetected Errors: 20166
+Incorrectly Denoised: 1467
+New Errors: 5596
+Total Errors after Denoising; 27229
+
+t16.maxshift50.maxsearch20.param4:0.7.param5:4_4dict15_intraread
+Original Errors: 9453553
+Undetected Errors: 18657
+Incorrectly Denoised: 1481
+New Errors: 10907
+Total Errors after Denoising; 31045
+
+t16.maxshift50.maxsearch20.param4:0.6.param5:3_4dict15_sorted_by_hamming/matchlen
+Original Errors: 9453553
+Undetected Errors: 12988
+Incorrectly Denoised: 1466
+New Errors: 5807
+Total Errors after Denoising; 20261
+
+t16.maxshift50.maxsearch20.param4:0.6.param5:3_4dict15_maxlimit_100
+Original Errors: 9453553
+Undetected Errors: 86189
+Incorrectly Denoised: 983
+New Errors: 4609
+Total Errors after Denoising; 91781
+
+t16.maxshift50.maxsearch20.param4:0.6.param5:3_4dict15_denoising_in_hamming_blocks
+Original Errors: 9453553
+Undetected Errors: 13352
+Incorrectly Denoised: 2360
+New Errors: 17735
+Total Errors after Denoising; 33447
+
+t16.maxshift50.maxsearch20.param4:0.6.param5:3_4dict15_denoising_in_hamming_blocks_and_shift_block_of_10
+Original Errors: 9453553
+Undetected Errors: 13119
+Incorrectly Denoised: 1506
+New Errors: 6415
+Total Errors after Denoising; 21040
+
+
+
+t16.maxshift50.maxsearch20.param4:0.6.param5:3_param60_4dict15_sort_by_(hamming+param6)/matchlen
+Original Errors: 9453553
+Undetected Errors: 12988
+Incorrectly Denoised: 1466
+New Errors: 5807
+Total Errors after Denoising; 20261
+
+t16.maxshift50.maxsearch20.param4:0.6.param5:3_param60.5_4dict15_sort_by_(hamming+param6)/matchlen
+Original Errors: 9453553
+Undetected Errors: 12536
+Incorrectly Denoised: 1473
+New Errors: 5469
+Total Errors after Denoising; 19478
+
+t16.maxshift50.maxsearch20.param4:0.6.param5:3_param61_4dict15_sort_by_(hamming+param6)/matchlen
+Original Errors: 9453553
+Undetected Errors: 12212
+Incorrectly Denoised: 1459
+New Errors: 5347
+Total Errors after Denoising; 19018
+
+t16.maxshift50.maxsearch20.param4:0.6.param5:3_param61.5_4dict15_sort_by_(hamming+param6)/matchlen
+Original Errors: 9453553
+Undetected Errors: 11045
+Incorrectly Denoised: 1463
+New Errors: 5643
+Total Errors after Denoising; 18151
+
+t16.maxshift50.maxsearch20.param4:0.6.param5:3_param62_4dict15_sort_by_(hamming+param6)/matchlen
+Original Errors: 9453553
+Undetected Errors: 10086
+Incorrectly Denoised: 1477
+New Errors: 6407
+Total Errors after Denoising; 17970
+
+t16.maxshift50.maxsearch20.param4:0.6.param5:3_param62.5_4dict15_sort_by_(hamming+param6)/matchlen
+Original Errors: 9453553
+Undetected Errors: 9375
+Incorrectly Denoised: 1496
+New Errors: 7620
+Total Errors after Denoising; 18491
+
+t16.maxshift50.maxsearch20.param4:0.6.param5:3_param63_4dict15_sort_by_(hamming+param6)/matchlen
+Original Errors: 9453553
+Undetected Errors: 8880
+Incorrectly Denoised: 1512
+New Errors: 9327
+Total Errors after Denoising; 19719
+
+t16.maxshift50.maxsearch20.param4:0.6.param5:3_param62_4dict15_sort_by_(hamming+param6)/matchlen_denoise_if_very low coverage and n-1 match
+Original Errors: 9453553
+Undetected Errors: 8986
+Incorrectly Denoised: 1477
+New Errors: 6428
+Total Errors after Denoising; 16891
+
+t16.maxshift50.maxsearch20.param4:0.6.param5:3_4dict15_repeat_with_denoised_read
+Original Errors: 9453553
+Undetected Errors: 12063
+Incorrectly Denoised: 1520
+New Errors: 6662
+Total Errors after Denoising; 20245
+
+t16.maxshift50.maxsearch20.param4:0.6.param5:5_new_sort_lc
+Original Errors: 9453553
+Undetected Errors: 7800
+Incorrectly Denoised: 1710
+New Errors: 28128
+Total Errors after Denoising; 37638

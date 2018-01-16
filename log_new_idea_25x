@@ -1,0 +1,71 @@
+
+t8.maxshift20.maxsearch1000
+Original Errors: 9453553
+Undetected Errors: 2061895
+Incorrectly Denoised: 3102
+New Errors: 197137
+Total Errors after Denoising; 2262134
+
+t8.maxshift30.maxsearch1000
+Original Errors: 9453553
+Undetected Errors: 587901
+Incorrectly Denoised: 2340
+New Errors: 51805
+Total Errors after Denoising; 642046
+
+t8.maxshift40.maxsearch1000
+Original Errors: 9453553
+Undetected Errors: 316881
+Incorrectly Denoised: 2454
+New Errors: 21861
+Total Errors after Denoising; 341196
+
+t16.maxshift20.maxsearch1000
+Original Errors: 9453553
+Undetected Errors: 2037464
+Incorrectly Denoised: 4999
+New Errors: 435589
+Total Errors after Denoising; 2478052
+
+t16.maxshift30.maxsearch1000
+Original Errors: 9453553
+Undetected Errors: 577462
+Incorrectly Denoised: 2899
+New Errors: 116357
+Total Errors after Denoising; 696718
+
+t16.maxshift40.maxsearch1000
+Original Errors: 9453553
+Undetected Errors: 309280
+Incorrectly Denoised: 2716
+New Errors: 52070
+Total Errors after Denoising; 364066
+
+t8.maxshift50.maxsearch1000
+Original Errors: 9453553
+Undetected Errors: 242073
+Incorrectly Denoised: 3018
+New Errors: 14275
+Total Errors after Denoising; 259366
+
+
+t8.maxshift50.maxsearch1000.param41
+Original Errors: 9453553
+Undetected Errors: 465942
+Incorrectly Denoised: 2847
+New Errors: 33084
+Total Errors after Denoising; 501873
+
+t8.maxshift50.maxsearch1000.param42
+Original Errors: 9453553
+Undetected Errors: 990159
+Incorrectly Denoised: 2916
+New Errors: 68248
+Total Errors after Denoising; 1061323
+
+t8.maxshift50.maxsearch20.param40
+Original Errors: 9453553
+Undetected Errors: 243168
+Incorrectly Denoised: 3000
+New Errors: 18193
+Total Errors after Denoising; 264361

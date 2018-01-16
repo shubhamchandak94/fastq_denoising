@@ -173,16 +173,16 @@ void denoise(bitset *read, char(*quality)[readlen+1], std::unordered_map<uint64_
 	std::ofstream fout(outfile+'.'+std::to_string(tid));
 	std::ofstream fout_quality(outfile_quality+'.'+std::to_string(tid));
 	std::vector<overlap> overlap_vec;
-	std::ofstream fout_overlap(outfile+".overlap."+std::to_string(tid));
-	std::ifstream fin_clean("/srv/data/shubham/assembly/fastq_denoising/assembly_data/c_elegans_c25_100_180.upper.clean");
-	fin_clean.seekg(uint64_t(i)*(readlen+1), fin_clean.beg);
-	char clean_read[readlen+1];
 
 	bitset current_bitset;
 	char current_quality[readlen+1], current_read[readlen+1], denoised_read[readlen+1], denoised_quality[readlen+1];
 	bool *added_rids = new bool [numreads];
 	std::fill(added_rids, added_rids+numreads,false);
 	bool exact_match_found;
+	std::ofstream fout_overlap(outfile+".overlap."+std::to_string(tid));
+	std::ifstream fin_clean("/srv/data/shubham/assembly/fastq_denoising/assembly_data/c_elegans_c25_100_180.upper.clean");
+	fin_clean.seekg(uint64_t(i)*(readlen+1), fin_clean.beg);
+	char clean_read[readlen+1];
 	while(i < stop)
 	{
 		fin_clean.getline(clean_read,readlen+1);
@@ -294,8 +294,30 @@ void denoise_read(char *current_read, char *current_quality, char *denoised_read
 	std::vector<double> total_count(readlen,0);
 	int num_bases_denoised = 0;
 	std::vector<int> denoised_bases(readlen,0);
+	int prev_hamming = 0;
 	for(auto it = overlap_vec.begin(); it != overlap_vec.end(); ++it)
 	{
+		if((*it).hamming > prev_hamming)
+		{
+			prev_hamming = (*it).hamming;
+			for(int i = 0; i < readlen; i++)
+			{	
+				if(!denoised_bases[i])
+				for(int j =0; j < 4; j++)
+				{
+					if((read_count[i][j]+0.25)/(total_count[i]+1)>= param4 && total_count[i]>param5)
+					{
+						denoised_read[i] = inttochar[j];
+						denoised_bases[i] = 1;
+						num_bases_denoised++;
+						break;
+					}
+				}
+			}	
+			if(num_bases_denoised == readlen)
+				break;
+		}
+
 		if((*it).shift <= 0)
 		{
 			startposa = 0;
@@ -313,17 +335,23 @@ void denoise_read(char *current_read, char *current_quality, char *denoised_read
 			if(denoised_bases[startposa+i])
 				continue;
 			read_count[startposa+i][chartolong[((*it).read)[startposb+i]]] += 1;
-			total_count[startposa+i]++;
-			if((read_count[startposa+i][chartolong[((*it).read)[startposb+i]]]+0.25)/(total_count[startposa+i]+1) >= param4 && total_count[startposa+i]>param5)
+			total_count[startposa+i] += 1;
+		}
+	}
+	for(int i = 0; i < readlen; i++)
+	{	
+		if(!denoised_bases[i])
+		for(int j =0; j < 4; j++)
+		{
+			if((read_count[i][j]+0.25)/(total_count[i]+1)>= param4 && total_count[i]>param5)
 			{
-				denoised_read[startposa+i] = ((*it).read)[startposb+i];	
-				denoised_bases[startposa+i] = 1;
-				num_bases_denoised++;	
+				denoised_read[i] = inttochar[j];
+				denoised_bases[i] = 1;
+				num_bases_denoised++;
+				break;
 			}
 		}
-		if(num_bases_denoised == readlen)
-			break;
-	}
+	}	
 	return;
 }
 

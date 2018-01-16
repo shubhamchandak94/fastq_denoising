@@ -9,9 +9,9 @@ set -e
 num_thr=8
 mode="default"
 param1=8.0
-param2=50 #maxshift
-param3=1000 #maxsearch
-param4=0
+param2=0.0
+param3=1.0
+param4=100
 
 usage()
 {
@@ -53,29 +53,25 @@ denoise()
 	fi
 	./src/preprocess.out $filename $pathname $readlen
 	readlen="$(head $pathname/output/input.dna | wc -L)"
-#	echo "#define maxshift $((readlen/2))" > src/config.h
-	echo "#define maxshift $param2" > src/config.h
+	echo "#define maxshift $((readlen/2))" > src/config.h
+
 	echo "#define thresh $reorder_thresh" >> src/config.h
 	echo "#define numdict 4" >> src/config.h
-	echo "#define maxsearch $param3" >> src/config.h
+	echo "#define maxsearch 20" >> src/config.h
 	echo "#define dict1_start $(( readlen > 100 ? readlen/2-15 : readlen/2-readlen*15/100 ))" >> src/config.h
 	echo "#define dict1_end $((readlen/2-1))" >> src/config.h
 	echo "#define dict2_start $((readlen/2))" >> src/config.h
 	echo "#define dict2_end $(( readlen > 100 ? readlen/2-1+15 : readlen/2-1+readlen*15/100 ))" >> src/config.h
 	echo "#define dict3_start 20" >> src/config.h
-        echo "#define dict4_start 65" >> src/config.h
-        echo "#define dict3_end 35" >> src/config.h
-        echo "#define dict4_end 80" >> src/config.h
-#	echo "#define dict5_start 5" >> src/config.h
-#        echo "#define dict6_start 80" >> src/config.h
-#        echo "#define dict5_end 20" >> src/config.h
-#        echo "#define dict6_end 95" >> src/config.h
-
+	echo "#define dict4_start 65" >> src/config.h
+	echo "#define dict3_end 35" >> src/config.h
+	echo "#define dict4_end 80" >> src/config.h
+	
 	echo "#define readlen $readlen" >> src/config.h
 	echo "#define num_thr $num_thr" >> src/config.h
 
-	g++ src/denoise_new_sort_lc.cpp -march=native -O3 -fopenmp -lpthread -std=c++11 -o src/denoise.out
-	./src/denoise.out $pathname $mode $param1 $param2 $param3 $param4 $param5 $param6
+	g++ src/denoise.cpp -march=native -O3 -fopenmp -lpthread -std=c++11 -o src/denoise.out
+	./src/denoise.out $pathname $mode $param1 $param2 $param3 $param4
 
 	mv $pathname/output/output.id $pathname/$(basename "$filename" .fastq).id
 	mv $pathname/output/output.dna $pathname/$(basename "$filename" .fastq).dna.d
@@ -91,7 +87,7 @@ fi
 
 mode=''
 
-while getopts ':d:t:1:2:3:4:5:6:h' opt; do
+while getopts ':d:t:1:2:3:4:h' opt; do
   case "$opt" in
     d) mode='d' && filename=$OPTARG;;
     t) num_thr=$OPTARG;;
@@ -100,8 +96,6 @@ while getopts ':d:t:1:2:3:4:5:6:h' opt; do
     2) param2=$OPTARG;;
     3) param3=$OPTARG;;
     4) param4=$OPTARG;;
-    5) param5=$OPTARG;;
-    6) param6=$OPTARG;;
     h) usage ;;
     \?) usage ;;
     *) usage ;;

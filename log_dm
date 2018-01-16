@@ -1,0 +1,14 @@
+
+karect
+Original Errors: 26831562
+Undetected Errors: 137703
+Incorrectly Denoised: 31066
+New Errors: 1303262
+Total Errors after Denoising; 1472031
+
+RECKONER
+Original Errors: 26831562
+Undetected Errors: 483231
+Incorrectly Denoised: 31330
+New Errors: 2018133
+Total Errors after Denoising; 2532694
